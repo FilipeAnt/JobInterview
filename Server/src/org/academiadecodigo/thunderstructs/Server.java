@@ -11,17 +11,21 @@ import java.util.concurrent.Executors;
 public class Server {
 
 
-    private final int PLAYERS_PER_GAME = 2;
     private ServerSocket serverSocket;
     private Socket[] playerSockets;
-    private ExecutorService clientsThreads;
+    private ExecutorService clientsThreadPool;
+    private int playerCounter;
+    private int playersPerGame;
+
 
     public Server() {
 
         try {
-            clientsThreads = Executors.newCachedThreadPool();
-            serverSocket = new ServerSocket(6565);
-            this.playerSockets = new Socket[PLAYERS_PER_GAME];
+
+            clientsThreadPool = Executors.newCachedThreadPool();
+            playersPerGame = ServerConfiguration.PLAYERS_PER_GAME;
+            serverSocket = new ServerSocket(ServerConfiguration.PORT_NUMBER);
+            this.playerSockets = new Socket[ServerConfiguration.PLAYERS_PER_GAME];
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -31,18 +35,29 @@ public class Server {
     public void start() {
 
         try {
-            int playersCounter = 0;
-            while (true) {
-                System.out.println("Waiting for players...");
-                playerSockets[playersCounter] = serverSocket.accept();
-                System.out.println(playerSockets[playersCounter].getInetAddress().getAddress() + "connected");
-                playersCounter++;
-                if (playersCounter % 2 == 0) {
-                    clientsThreads.submit(new PlayerHandler(playerSockets));
+
+            while (serverSocket.isBound()) {
+
+                System.out.println(ServerMessage.AWAITING_CLIENT_CONNECTION);
+
+                playerSockets[playerCounter] = serverSocket.accept();
+                System.out.println(getPlayerIPMessage());
+                playerCounter++;
+
+                if (playerCounter == playersPerGame) {
+                    clientsThreadPool.submit(new PlayerHandler(playerSockets)); //TODO: Method
+                    System.out.println(ServerMessage.NEW_GAME_STARTED);
+                    playerCounter = 0;
                 }
             }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public String getPlayerIPMessage () {
+
+        return ServerMessage.CONNECTION_WITH + playerSockets[playerCounter].getInetAddress() + ".\n";
     }
 }

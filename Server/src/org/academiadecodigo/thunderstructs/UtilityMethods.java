@@ -1,6 +1,8 @@
 package org.academiadecodigo.thunderstructs;
 
-public class RandomGenerator {
+import java.util.concurrent.ExecutorService;
+
+public class UtilityMethods {
 
     public static int generateRandomNum (int max, int min) {
 

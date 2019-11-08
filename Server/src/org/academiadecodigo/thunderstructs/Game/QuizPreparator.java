@@ -1,7 +1,7 @@
 package org.academiadecodigo.thunderstructs.Game;
 
 import org.academiadecodigo.thunderstructs.Operations.Commands;
-import org.academiadecodigo.thunderstructs.RandomGenerator;
+import org.academiadecodigo.thunderstructs.UtilityMethods;
 import org.academiadecodigo.thunderstructs.ServerConfiguration;
 
 import java.io.IOException;
@@ -43,7 +43,7 @@ public class QuizPreparator implements Commands {
 
     public String getRandomQuestion() {
 
-        int questionIndex = RandomGenerator.generateRandomNum(QuestionDB.NUM_OF_QUESTIONS, 0);
+        int questionIndex = UtilityMethods.generateRandomNum(QuestionDB.NUM_OF_QUESTIONS, 0);
         String question = QuestionDB.QUESTIONS_DATA_BASE[questionIndex];
 
         return question;
