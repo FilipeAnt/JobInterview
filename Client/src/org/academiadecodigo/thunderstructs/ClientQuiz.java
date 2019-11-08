@@ -34,7 +34,6 @@ public class ClientQuiz {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("startClientQuiz");
         question(reader, requestNextAnswer);
     }
 
@@ -63,7 +62,6 @@ public class ClientQuiz {
         String input = "";
         try {
             input = reader.readLine();
-            System.out.println("receivedMessage");
         } catch (IOException e) {
             e.printStackTrace();
         }

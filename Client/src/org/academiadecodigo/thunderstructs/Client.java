@@ -44,7 +44,7 @@ public class Client {
 
     public void listen() {
         String input;
-        System.out.println("conected!!!! waiting message");
+        System.out.println("Conected!!!!Waiting for second player...");
         try {
             reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             input = reader.readLine();
@@ -60,7 +60,6 @@ public class Client {
     }
 
     public void launchQuiz() {
-        System.out.println("launchQuiz");
         quiz.start(socket);
     }
 
