@@ -56,6 +56,7 @@ public class ClientQuiz {
 
             addToLog(answer);
         }
+        presentResults();
     }
 
     public String receiveMessage(BufferedReader reader) {
@@ -85,7 +86,7 @@ public class ClientQuiz {
 
     public void presentResults() {
         for (Log logs : log) {
-            logs.toString();
+            System.out.println(logs.toString());
         }
     }
 
