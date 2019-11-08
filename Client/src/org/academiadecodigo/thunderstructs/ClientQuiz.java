@@ -30,12 +30,12 @@ public class ClientQuiz {
     public void start(Socket socket) {
         try {
             reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            requestNextAnswer = new PrintWriter(socket.getOutputStream(),true);
+            requestNextAnswer = new PrintWriter(socket.getOutputStream(), true);
         } catch (IOException e) {
             e.printStackTrace();
         }
         System.out.println("startClientQuiz");
-        question(reader,requestNextAnswer);
+        question(reader, requestNextAnswer);
     }
 
 
@@ -51,7 +51,7 @@ public class ClientQuiz {
             requestNextAnswer.println(answerNo);
 
             String answer = getAnswer(answerNo);
-
+            requestNextAnswer.println(answer);
             checkAnswer(answer);
 
             addToLog(answer);

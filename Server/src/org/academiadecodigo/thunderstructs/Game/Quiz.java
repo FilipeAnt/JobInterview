@@ -33,7 +33,6 @@ public class Quiz implements Runnable{
         }
     }
 
-
     @Override
     public void run() {
 
@@ -58,6 +57,8 @@ public class Quiz implements Runnable{
                 e.printStackTrace();
             }
         }
+
+        //TODO nao detecta quando a thread acaba
         System.out.println("acabou");
         sendQuestions.println("end");
         quizzPreparator.updatePlayerScore(player, score);
