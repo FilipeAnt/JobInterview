@@ -27,8 +27,8 @@ public class ClientQuiz {
     }
 
     public void start(Socket socket) { //init
-            this.clientSocket = socket;
-            question();
+        this.clientSocket = socket;
+        question();
     }
 
 
@@ -37,8 +37,6 @@ public class ClientQuiz {
         String serverMessage = "";
 
         while (!(serverMessage = receiveMessage()).equals("end")) {
-
-            System.out.println("Teste");
 
             clientQuizMenu.update(serverMessage);
             int answerNum = clientQuizMenu.promptQuizAnswer();
@@ -51,7 +49,7 @@ public class ClientQuiz {
         }
     }
 
-    public void nextQuestion () {
+    public void nextQuestion() {
 
         try {
 
@@ -63,9 +61,9 @@ public class ClientQuiz {
         }
     }
 
-    public void logAnswer () {
+    public void logAnswer() {
 
-     //   log.add(answer)
+        //   log.add(answer)
 
     }
 
@@ -77,9 +75,9 @@ public class ClientQuiz {
 
             BufferedReader bReader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
-            System.out.println("Teste#4");
+            countdown();
+
             receivedMessage = bReader.readLine();
-            System.out.println("receivedMessage");
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -106,6 +104,24 @@ public class ClientQuiz {
         for (Log logs : log) {
             logs.toString();
         }
+    }
+
+    private void countdown() {
+        try {
+            System.out.println(Messages.SPACE + Messages.THREE);
+            Thread.sleep(1000);
+
+            System.out.println(Messages.TWO);
+            Thread.sleep(1000);
+
+            System.out.println(Messages.ONE);
+            Thread.sleep(1000);
+            System.out.println(Messages.SPACE);
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
     }
 
 }

@@ -27,11 +27,11 @@ public class ClientAppMenu {
     }
 
     public int menuPrompt(String message, String[] menuOptions) {
-
+        System.out.println(Messages.BAR);
         MenuInputScanner scanner = new MenuInputScanner(menuOptions);
         scanner.setMessage(message);
 
-        return prompt.getUserInput(scanner);
+        return prompt.getUserInput(scanner) ;
     }
 
 }

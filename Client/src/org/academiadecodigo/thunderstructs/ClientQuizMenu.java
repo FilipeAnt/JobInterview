@@ -16,7 +16,7 @@ public class ClientQuizMenu extends ClientAppMenu {
 
     public int promptQuizAnswer () {
 
-        String question = decryptor.getMessage();
+        String question = decryptor.getMessage() + "\n\n" + Messages.BAR;
         String[] answerOptions = decryptor.getOptions();
 
         return this.menuPrompt(question, answerOptions);
