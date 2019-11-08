@@ -16,10 +16,8 @@ public class Log {
 
     @Override
     public String toString() {
-        return "" +
-                "question='" + question + '\'' +
-                ", correctAnswer='" + correctAnswer + '\'' +
-                ", userAnswer='" + userAnswer + '\'' +
-                '}';
+        return "" + question + '\'' +
+                " | Correct Answer: " + correctAnswer + '\'' +
+                " | User Answer: " + userAnswer + '\'';
     }
 }

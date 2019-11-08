@@ -18,12 +18,11 @@ public class TimeCounter implements Runnable {
         for (int i = 15; i > 0; i--) {
             try {
                 Thread.sleep(1000);
-                System.out.println(i);
-
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
         quiz.setIsTimeout();
+        System.out.println("TimeOut");
     }
 }
