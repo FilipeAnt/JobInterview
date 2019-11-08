@@ -1,6 +1,9 @@
 package org.academiadecodigo.thunderstructs;
 
 public class Messages {
+
+    public static final String REQUEST_NEXT_QUESTION = "/Next question";
+
     public static final String BLACK_BACKGROUND = "\033[40m";  // BLACK
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_YELLOW = "\u001B[33m";
