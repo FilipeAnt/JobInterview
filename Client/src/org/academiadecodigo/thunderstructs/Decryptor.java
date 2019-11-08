@@ -17,7 +17,7 @@ public class Decryptor {
     public String[] getOptions() {
         String[] options = new String[questionData.length - 2];
         int counter = 0;
-        for (int i = 1; i < options.length; i++) {
+        for (int i = 1; i <= options.length; i++) {
             options[counter] = questionData[i];
             counter++;
         }
