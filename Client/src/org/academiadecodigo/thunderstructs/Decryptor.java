@@ -1,27 +1,30 @@
 package org.academiadecodigo.thunderstructs;
 
 public class Decryptor {
-    private String[] input;
 
-    public void split(String string) {
-        input = string.split("#");
+    private String[] questionData;
+
+
+    public void update (String serverMessage) {
+
+        this.questionData = serverMessage.split("#");
     }
 
     public String getMessage() {
-        return input[0];
+        return questionData[0];
     }
 
     public String[] getOptions() {
-        String[] options = new String[input.length - 2];
+        String[] options = new String[questionData.length - 2];
         int counter = 0;
         for (int i = 1; i < options.length; i++) {
-            options[counter] = input[i];
+            options[counter] = questionData[i];
             counter++;
         }
         return options;
     }
 
     public String correctAnswer() {
-        return input[input.length - 1];
+        return questionData[questionData.length - 1];
     }
 }
