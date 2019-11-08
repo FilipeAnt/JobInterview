@@ -42,8 +42,9 @@ public class ClientQuiz {
     public void question(BufferedReader reader, PrintWriter requestNextAnswer) {
 
         String input = "";
-        while (!input.equals("end")) {
-            input = receiveMessage(reader);
+        while (!(input = receiveMessage(reader)).equals("end")) {
+            System.out.println(input);
+            //input = receiveMessage(reader);
             decryptor.split(input);
             menu = new MenuInputScanner(decryptor.getOptions());
             menu.setMessage(decryptor.getMessage());
@@ -85,9 +86,9 @@ public class ClientQuiz {
     }
 
     public void presentResults() {
+
         for (Log logs : log) {
             System.out.println(logs.toString());
         }
     }
-
 }

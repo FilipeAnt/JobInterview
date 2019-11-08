@@ -55,10 +55,9 @@ public class Quiz implements Runnable {
         }
 
         //TODO nao detecta quando a thread acaba
-        System.out.println("acabou o fdp");
         sendQuestions.println("end");
         quizzPreparator.updatePlayerScore(player, score);
-        //Need to close this thread
+
     }
 
     public void setIsTimeout() {
