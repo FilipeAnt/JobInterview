@@ -15,7 +15,8 @@ public class Decryptor {
         String[] options = new String[input.length - 2];
         int counter = 0;
         for (int i = 1; i < options.length; i++) {
-            options[counter++] = input[i];
+            options[counter] = input[i];
+            counter++;
         }
         return options;
     }
