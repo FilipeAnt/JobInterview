@@ -14,7 +14,6 @@ import java.util.concurrent.Executors;
 
 public class QuizPreparator implements Commands {
 
-
     private Socket[] playerSockets;
     private String[] roundQuestions;
 
@@ -25,7 +24,7 @@ public class QuizPreparator implements Commands {
 
         this.playerSockets = playerSockets;
         this.roundQuestions = new String[ServerConfiguration.QUESTIONS_PER_ROUND];
-        this.playerScoreMap= new HashMap<>();
+        this.playerScoreMap = new HashMap<>();
         this.playerScoreMap.put(playerSockets[0], ServerConfiguration.DEFAULT_SCORE);
         this.playerScoreMap.put(playerSockets[1], ServerConfiguration.DEFAULT_SCORE);
         this.cachedPool = Executors.newCachedThreadPool();
@@ -36,7 +35,6 @@ public class QuizPreparator implements Commands {
         for (int i = 0; i < roundQuestions.length; i++) {
 
             roundQuestions[i] = getRandomQuestion();
-
         }
         return roundQuestions;
     }
