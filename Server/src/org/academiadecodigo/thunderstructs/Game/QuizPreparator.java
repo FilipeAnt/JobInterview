@@ -1,5 +1,9 @@
 package org.academiadecodigo.thunderstructs.Game;
 
+import org.academiadecodigo.thunderstructs.Operations.Commands;
+import org.academiadecodigo.thunderstructs.RandomGenerator;
+import org.academiadecodigo.thunderstructs.ServerConfiguration;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
@@ -8,7 +12,7 @@ import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class QuizPreparator {
+public class QuizPreparator implements Commands {
 
 
     private Socket[] playerSockets;
@@ -17,7 +21,7 @@ public class QuizPreparator {
     private Map<Socket, Integer> playerScoreMap;
     private ExecutorService cachedPool;
 
-    public QuizzPreparator(Socket[] playerSockets) {
+    public QuizPreparator(Socket[] playerSockets) {
 
         this.playerSockets = playerSockets;
         this.roundQuestions = new String[ServerConfiguration.QUESTIONS_PER_ROUND];
@@ -59,7 +63,7 @@ public class QuizPreparator {
 
             Socket playerSocket = playerSockets[--playerSocketIndex];
 
-            Quizz quiz = new Quizz(playerSocket, roundQuestions, this);
+            Quiz quiz = new Quiz(playerSocket, roundQuestions, this);
 
             cachedPool.submit(quiz);
         }

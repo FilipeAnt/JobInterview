@@ -1,8 +1,10 @@
 package org.academiadecodigo.thunderstructs.Game;
 
+import org.academiadecodigo.thunderstructs.Operations.OperationFactory;
+
 import java.net.Socket;
 
-public class PlayerHandler {
+public class PlayerHandler implements Runnable {
 
     private Socket[] players;
     private int actions = 0;

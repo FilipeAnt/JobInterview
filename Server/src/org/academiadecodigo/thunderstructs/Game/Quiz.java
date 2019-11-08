@@ -1,23 +1,25 @@
 package org.academiadecodigo.thunderstructs.Game;
 
+import org.academiadecodigo.thunderstructs.TimeCounter;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-public class Quiz {
+public class Quiz implements Runnable{
 
 
     private Socket player;
     private String[] questions;
-    private QuizzPreparator quizzPreparator;
+    private QuizPreparator quizzPreparator;
     private Thread thread;
     private int score;
     private PrintWriter sendQuestions;
     private BufferedReader receiveAnswers;
 
-    public Quizz(Socket player, String[] questions, QuizzPreparator quizzPreparator) {
+    public Quiz(Socket player, String[] questions, QuizPreparator quizzPreparator) {
 
         this.player = player;
         this.questions = questions;
@@ -60,8 +62,6 @@ public class Quiz {
         sendQuestions.println("end");
         quizzPreparator.updatePlayerScore(player, score);
         //Need to close this thread
-
-
     }
 
     public boolean checkTime() {
