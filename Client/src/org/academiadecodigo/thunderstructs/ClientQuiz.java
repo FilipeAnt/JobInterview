@@ -51,6 +51,9 @@ public class ClientQuiz {
             addToLog(answer);
             nextQuestion();
         }
+        System.out.println(Messages.TIMEOUT);
+        System.out.println("YOUR RESULTS: ");
+        presentResults();
     }
 
     public void nextQuestion() {
@@ -106,7 +109,7 @@ public class ClientQuiz {
 
     public void presentResults() {
         for (Log logs : log) {
-            logs.toString();
+            System.out.println(logs.toString());
         }
     }
 

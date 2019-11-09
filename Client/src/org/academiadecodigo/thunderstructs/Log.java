@@ -18,6 +18,6 @@ public class Log {
     public String toString() {
         return "" + question + '\'' +
                 " | Correct Answer: " + correctAnswer + '\'' +
-                " | User Answer: " + userAnswer + '\'';
+                " | User Answer: " + userAnswer + '\'' + "|";
     }
 }
