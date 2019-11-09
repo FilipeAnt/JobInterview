@@ -1,9 +1,8 @@
 package org.academiadecodigo.thunderstructs.Operations;
 
-public class ShowScore implements Runnable {
-
+public class ShowScore implements Commands {
     @Override
-    public void run() {
+    public void execute(){
 
     }
 }

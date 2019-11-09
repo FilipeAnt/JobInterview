@@ -36,12 +36,16 @@ public class ClientQuiz {
 
         String serverMessage = "";
 
+        countdown();
+
         while (!(serverMessage = receiveMessage()).equals("end")) {
 
             decryptor.update(serverMessage);
 
             String question = decryptor.getQuestion();
             String[] options = decryptor.getOptions();
+
+            System.out.println(Messages.SPACE);
 
             int answerNum = clientQuizMenu.promptQuizAnswer(question, options);
 
@@ -51,6 +55,10 @@ public class ClientQuiz {
             addToLog(answer);
             nextQuestion();
         }
+
+        System.out.println(Messages.TIMEOUT);
+        System.out.println("YOUR RESULTS: ");
+        presentResults();
     }
 
     public void nextQuestion() {
@@ -79,7 +87,7 @@ public class ClientQuiz {
 
             BufferedReader bReader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
-            countdown();
+
 
             receivedMessage = bReader.readLine();
 
@@ -106,7 +114,7 @@ public class ClientQuiz {
 
     public void presentResults() {
         for (Log logs : log) {
-            logs.toString();
+            System.out.println(logs.toString());
         }
     }
 
@@ -128,4 +136,11 @@ public class ClientQuiz {
 
     }
 
+    public int getScore() {
+        return score;
+    }
+
+    public void sendScore(){
+
+    }
 }

@@ -3,7 +3,9 @@ package org.academiadecodigo.thunderstructs;
 public class Messages {
 
     public static final String REQUEST_NEXT_QUESTION = "/Next question";
+    public static final String RED = "\u001b[31m";
     public static final String BLUE = "\u001B[34m";
+    public static final String GREEN = "\u001B[32m";
     public static final String BLACK_BACKGROUND = "\033[40m";  // BLACK
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_YELLOW = "\u001B[33m";
@@ -12,7 +14,7 @@ public class Messages {
 
     public static final String SPACE = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
 
-    public static final String THREE = ".----------------. \n" +
+    public static final String THREE = RED + ".----------------. \n" +
             "| .--------------. |\n" +
             "| |    ______    | |\n" +
             "| |   / ____ `.  | |\n" +
@@ -22,9 +24,9 @@ public class Messages {
             "| |   \\______.'  | |\n" +
             "| |              | |\n" +
             "| '--------------' |\n" +
-            " '----------------' \n\n\n\n\n";
+            " '----------------' \n\n\n\n\n" + ANSI_RESET;
 
-    public static final String TWO = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n" +
+    public static final String TWO = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n" + ANSI_YELLOW +
             ".----------------. \n" +
             "| .--------------. |\n" +
             "| |    _____     | |\n" +
@@ -35,10 +37,10 @@ public class Messages {
             "| |  |_______|   | |\n" +
             "| |              | |\n" +
             "| '--------------' |\n" +
-            " '----------------' \n\n\n\n\n";
+            " '----------------' \n\n\n\n\n" + ANSI_RESET;
 
 
-    public static final String ONE = " \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n" +
+    public static final String ONE = " \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n" + GREEN +
             ".----------------. \n" +
             "| .--------------. |\n" +
             "| |     __       | |\n" +
@@ -49,7 +51,7 @@ public class Messages {
             "| |   |_____|    | |\n" +
             "| |              | |\n" +
             "| '--------------' |\n" +
-            " '----------------' \n\n\n\n\n";
+            " '----------------' \n\n\n\n\n" + ANSI_RESET;
 
     public static final String WELCOME =
             YELLOW_BOLD +"\n\n\n"+ BAR + "\n" + BAR + BLUE +"\n\n" + "     ██╗ ██████╗ ██████╗     ██╗███╗   ██╗████████╗███████╗██████╗ ██╗   ██╗██╗███████╗██╗    ██╗    \n" +
@@ -59,4 +61,11 @@ public class Messages {
                     "╚█████╔╝╚██████╔╝██████╔╝    ██║██║ ╚████║   ██║   ███████╗██║  ██║ ╚████╔╝ ██║███████╗╚███╔███╔╝    \n" +
                     " ╚════╝  ╚═════╝ ╚═════╝     ╚═╝╚═╝  ╚═══╝   ╚═╝   ╚══════╝╚═╝  ╚═╝  ╚═══╝  ╚═╝╚══════╝ ╚══╝╚══╝     \n" +
                     "\n" + YELLOW_BOLD + BAR + "\n" + BAR + "\n" + ANSI_RESET + "\n Enter your host:";
+
+    public static final String TIMEOUT = RED + "████████╗██╗███╗   ███╗███████╗     ██████╗ ██╗   ██╗████████╗\n" +
+            "╚══██╔══╝██║████╗ ████║██╔════╝    ██╔═══██╗██║   ██║╚══██╔══╝\n" +
+            "   ██║   ██║██╔████╔██║█████╗      ██║   ██║██║   ██║   ██║   \n" +
+            "   ██║   ██║██║╚██╔╝██║██╔══╝      ██║   ██║██║   ██║   ██║   \n" +
+            "   ██║   ██║██║ ╚═╝ ██║███████╗    ╚██████╔╝╚██████╔╝   ██║   \n" +
+            "   ╚═╝   ╚═╝╚═╝     ╚═╝╚══════╝     ╚═════╝  ╚═════╝    ╚═╝  " + ANSI_RESET ;
 }

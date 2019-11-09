@@ -59,10 +59,22 @@ public class Quiz implements Runnable {
 
         //TODO nao detecta quando a thread acaba
         sendQuestions.println("end");
+        score = readScore();
         quizzPreparator.updatePlayerScore(player, score);
 
     }
-
+    public int readScore(){
+        int score = 0;
+        try{
+            BufferedReader readScore = new BufferedReader(new InputStreamReader(player.getInputStream()));
+            String playerScore = readScore.readLine();
+            score = Integer.parseInt(playerScore);
+            readScore.close();
+        } catch (IOException e){
+            e.fillInStackTrace();
+        }
+        return score;
+    }
     public void setIsTimeout() {
         this.isTimeout = true;
     }

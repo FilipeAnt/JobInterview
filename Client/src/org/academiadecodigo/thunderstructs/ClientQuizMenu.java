@@ -2,7 +2,7 @@ package org.academiadecodigo.thunderstructs;
 
 public class ClientQuizMenu extends ClientAppMenu {
 
-    Decryptor decryptor;
+    private Decryptor decryptor;
 
     public ClientQuizMenu () {
 
@@ -11,7 +11,7 @@ public class ClientQuizMenu extends ClientAppMenu {
 
     public int promptQuizAnswer (String question, String[] answerOptions) {
 
-        String finalQuestion = question + "\n\n" + Messages.BAR;
+        String finalQuestion = question + "\n\n" + Messages.BAR + Messages.BAR;
         return this.menuPrompt(question, answerOptions);
     }
 }
