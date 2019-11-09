@@ -2,7 +2,7 @@ package org.academiadecodigo.thunderstructs;
 
 public class ClientQuizMenu extends ClientAppMenu {
 
-    Decryptor decryptor;
+    private Decryptor decryptor;
 
     public ClientQuizMenu () {
 
