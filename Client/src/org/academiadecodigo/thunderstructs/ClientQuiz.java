@@ -36,12 +36,16 @@ public class ClientQuiz {
 
         String serverMessage = "";
 
+        countdown();
+
         while (!(serverMessage = receiveMessage()).equals("end")) {
 
             decryptor.update(serverMessage);
 
             String question = decryptor.getQuestion();
             String[] options = decryptor.getOptions();
+
+            System.out.println(Messages.SPACE);
 
             int answerNum = clientQuizMenu.promptQuizAnswer(question, options);
 
@@ -82,7 +86,7 @@ public class ClientQuiz {
 
             BufferedReader bReader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
-            countdown();
+
 
             receivedMessage = bReader.readLine();
 
