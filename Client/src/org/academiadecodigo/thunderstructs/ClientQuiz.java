@@ -51,6 +51,7 @@ public class ClientQuiz {
             addToLog(answer);
             nextQuestion();
         }
+
         System.out.println(Messages.TIMEOUT);
         System.out.println("YOUR RESULTS: ");
         presentResults();
@@ -131,4 +132,11 @@ public class ClientQuiz {
 
     }
 
+    public int getScore() {
+        return score;
+    }
+
+    public void sendScore(){
+
+    }
 }
