@@ -55,7 +55,12 @@ public class ClientQuiz {
             addToLog(answer);
             nextQuestion();
         }
-
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        sendScore();
         System.out.println(Messages.TIMEOUT);
         System.out.println("YOUR RESULTS: ");
         presentResults();
@@ -133,14 +138,14 @@ public class ClientQuiz {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-    }
-
-    public int getScore() {
-        return score;
     }
 
     public void sendScore(){
-
+        try{
+            PrintWriter sendScore = new PrintWriter(new OutputStreamWriter(clientSocket.getOutputStream()),true);
+            sendScore.println(score);
+        } catch (IOException e){
+            e.getMessage();
+        }
     }
 }

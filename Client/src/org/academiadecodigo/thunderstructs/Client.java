@@ -1,8 +1,9 @@
 package org.academiadecodigo.thunderstructs;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import org.academiadecodigo.bootcamp.Prompt;
+import org.academiadecodigo.bootcamp.scanners.menu.MenuInputScanner;
+
+import java.io.*;
 import java.net.Socket;
 import java.util.Scanner;
 
@@ -12,6 +13,7 @@ public class Client {
     private String adress;
     private BufferedReader reader;
     private ClientQuiz quiz;
+    private Prompt prompt = new Prompt(System.in,System.out);
 
 
     public Client() {
@@ -21,6 +23,7 @@ public class Client {
     public void start() {
         welcomeMessage();
         connect();
+        initialMenu();
         listen();
 
 
@@ -41,7 +44,6 @@ public class Client {
             e.printStackTrace();
         }
     }
-
     public void listen() {
         String input;
         System.out.println("Conected!!!!Waiting for second player...");
@@ -51,7 +53,7 @@ public class Client {
             while (!input.equals("start")) {
                 input = reader.readLine();
             }
-
+            System.out.println(input);
             launchQuiz();
         } catch (IOException e) {
             e.printStackTrace();
@@ -64,6 +66,16 @@ public class Client {
     }
 
 
-    public void talk() {
+    public void initialMenu() {
+        String[] options = {"Launch as guest","Login","Register","Exit"};
+        MenuInputScanner initialMenu = new MenuInputScanner(options);
+        initialMenu.setMessage("Choose:");
+        int answer = prompt.getUserInput(initialMenu);
+        try {
+            PrintWriter option = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()),true);
+            option.println(answer);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

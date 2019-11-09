@@ -33,7 +33,7 @@ public class PlayerGenerator {
                 break;
 
             case 2:
-                newPlayer = loginPlayer ();
+                newPlayer = loginPlayer();
                 break;
 
             case 3:
