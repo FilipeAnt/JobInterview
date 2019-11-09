@@ -6,11 +6,11 @@ import java.net.Socket;
 
 public class PlayerHandler implements Runnable {
 
-    private Socket[] players;
+    private Player[] players;
     private int actions = 0;
     private OperationFactory operations;
 
-    public PlayerHandler(Socket[] players) {
+    public PlayerHandler(Player[] players) {
         this.players = players;
         this.operations = new OperationFactory();
     }

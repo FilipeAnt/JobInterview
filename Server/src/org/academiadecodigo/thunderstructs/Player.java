@@ -10,17 +10,18 @@ public class Player {
     private int totalPoints;
     private int pointsLastGame;
     private int pointsLastSession;
-
+    private int roundPoints;
     private Socket playerSocket;
 
 
-    public Player (String playerName) {
+    public Player (String playerName, Socket socket) {
 
         this.playerName = playerName;
         this.totalJobs = 0;
         this.totalPoints = 0;
         this.pointsLastGame = 0;
         this.pointsLastSession = 0;
+        this.playerSocket = socket;
     }
 
     public Player (String[] playerData) {
@@ -58,4 +59,7 @@ public class Player {
         return playerSocket;
     }
 
+    public void setRoundPoints(int roundPoints) {
+        this.roundPoints = roundPoints;
+    }
 }

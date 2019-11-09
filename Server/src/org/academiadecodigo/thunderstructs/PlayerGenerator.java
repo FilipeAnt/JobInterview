@@ -1,5 +1,6 @@
 package org.academiadecodigo.thunderstructs;
 
+import org.academiadecodigo.thunderstructs.Utilitary.Coolness.CoolReader;
 import org.academiadecodigo.thunderstructs.Utilitary.ServerMessage;
 
 import java.io.BufferedReader;
@@ -33,12 +34,10 @@ public class PlayerGenerator {
                 break;
 
             case 2:
-                newPlayer = loginPlayer ();
-                break;
+                //newPlayer = loginPlayer ();
 
             case 3:
-                newPlayer = registerPlayer (clientSocket);
-                break;
+                //newPlayer = registerPlayer (clientSocket);
 
             default:
                 newPlayer = unregisteredPlayer();
@@ -52,31 +51,32 @@ public class PlayerGenerator {
 
         String playerName = "";
 
-        try {
+        //try {
 
-            BufferedReader bReader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-            PrintWriter pWriter = new PrintWriter(clientSocket.getOutputStream());
-            playerName = bReader.readLine();
+            //BufferedReader bReader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+            //PrintWriter pWriter = new PrintWriter(clientSocket.getOutputStream());
+            playerName = "HOHO";//bReader.readLine();
 
-            while (dataManager.checkIfExists(playerName)) {
+            //while (dataManager.checkIfExists(playerName)) {
 
-                playerName = bReader.readLine();
-                pWriter.println(ServerMessage.C_NICKNAME_ALREADY_EXSITS);
+              //  pWriter.println(ServerMessage.C_NICKNAME_ALREADY_EXSITS);
+               // playerName = bReader.readLine();
 
-            }
+            //}
 
-        } catch (IOException e) {
-            e.getStackTrace();
-        }
+        //} catch (IOException e) {
+          //  e.getStackTrace();
+        //}
 
-        return new Player(playerName);
+        return new Player(playerName, clientSocket);
     }
+
 
     public void loginPlayer () {
 
+        String name = "Teste";
 
-
-        return new Player(String username, String password);
+        new Player(name/*String username, String password*/, clientSocket);
     }
 
     public void registerPlayer (Socket clientSocket) {

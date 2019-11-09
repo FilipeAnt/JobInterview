@@ -1,6 +1,7 @@
 package org.academiadecodigo.thunderstructs.Game;
 
 import org.academiadecodigo.thunderstructs.Operations.Commands;
+import org.academiadecodigo.thunderstructs.Player;
 import org.academiadecodigo.thunderstructs.Utilitary.UtilityMethods;
 import org.academiadecodigo.thunderstructs.Utilitary.ServerConfiguration;
 
@@ -8,25 +9,27 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class QuizPreparator implements Commands {
 
-    private Socket[] playerSockets;
+    private Player[] players;
     private String[] roundQuestions;
 
-    private Map<Socket, Integer> playerScoreMap;
+    //private Map<Socket, Integer> playerScoreMap;
     private ExecutorService cachedPool;
 
-    public QuizPreparator(Socket[] playerSockets) {
 
-        this.playerSockets = playerSockets;
+    public QuizPreparator(Player[] playerSockets) {
+
+        this.players = playerSockets;
         this.roundQuestions = new String[ServerConfiguration.QUESTIONS_PER_ROUND];
-        this.playerScoreMap = new HashMap<>();
-        this.playerScoreMap.put(playerSockets[0], ServerConfiguration.DEFAULT_SCORE);
-        this.playerScoreMap.put(playerSockets[1], ServerConfiguration.DEFAULT_SCORE);
+        //this.playerScoreMap = new HashMap<>();
+        //this.playerScoreMap.put(playerSockets[0], ServerConfiguration.DEFAULT_SCORE);
+        //this.playerScoreMap.put(playerSockets[1], ServerConfiguration.DEFAULT_SCORE);
         this.cachedPool = Executors.newCachedThreadPool();
     }
 
@@ -47,21 +50,25 @@ public class QuizPreparator implements Commands {
         return question;
     }
 
-/*    public Socket getPlayerSocket (Socket[] playerSockets) {
+/*    public Socket getPlayerSocket (Socket[] players) {
 
          playerScoreMap.put();
 
     }*/
 
-    public void startQuizz(Socket[] playerSockets) {
+    public void startQuizz(Player[] players) {
 
         int playerSocketIndex = ServerConfiguration.PLAYERS_PER_GAME;
-
+        System.out.println("inside StartQuizz");
         while (playerSocketIndex > 0) {
 
-            Socket playerSocket = playerSockets[--playerSocketIndex];
-            Quiz quiz = new Quiz(playerSocket, roundQuestions, this);
+            Socket playerSocket = players[--playerSocketIndex].getPlayerSocket();
 
+            System.out.println(playerSocketIndex);
+            System.out.println(players[playerSocketIndex].getPlayerName());
+
+            Quiz quiz = new Quiz(playerSocket, roundQuestions, this);
+            System.out.println("Quiz created!");
             cachedPool.submit(quiz);
         }
     }
@@ -72,9 +79,9 @@ public class QuizPreparator implements Commands {
 
         try {
 
-            for (Socket s : playerSockets) {
+            for (Player p : players) {
 
-                PrintWriter printWriter = new PrintWriter(s.getOutputStream());
+                PrintWriter printWriter = new PrintWriter(p.getPlayerSocket().getOutputStream());
                 printWriter.println(finalMessage);
 
             }
@@ -87,18 +94,18 @@ public class QuizPreparator implements Commands {
 
     public String finalScoresMessage() {
 
-        String message = "First player score was: " + playerScoreMap.get(playerSockets[0]) + " and player two score was: " + playerScoreMap.get(playerSockets[1]);
+        //String message = "First player score was: " + playerScoreMap.get(players[0]) + " and player two score was: " + playerScoreMap.get(players[1]);
 
-        return message;
+        return "hehe";
     }
 
     public void updatePlayerScore(Socket playerSocket, int playerScore) {
 
-        for (Socket s : playerScoreMap.keySet()) {
+        for (Player s : players) {
 
-            if (s == playerSocket) {
+            if (s.getPlayerSocket() == playerSocket) {
 
-                playerScoreMap.replace(s, playerScore);
+                s.setRoundPoints(playerScore);
 
             }
         }
@@ -109,7 +116,8 @@ public class QuizPreparator implements Commands {
     public void execute() {
 
         String[] roundQuestions = generateRoundQuestions();
-        startQuizz(playerSockets);
+        System.out.println("StartQuiz");
+        startQuizz(players);
         endQuiz();
     }
 

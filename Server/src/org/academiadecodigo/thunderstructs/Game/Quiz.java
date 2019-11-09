@@ -21,7 +21,7 @@ public class Quiz implements Runnable {
     private BufferedReader receiveAnswers;
 
     public Quiz(Socket player, String[] questions, QuizPreparator quizzPreparator) {
-
+        System.out.println("creating");
         this.player = player;
         this.questions = questions;
         this.quizzPreparator = quizzPreparator;
@@ -32,13 +32,17 @@ public class Quiz implements Runnable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        System.out.println("Created");
     }
 
     @Override
     public void run() {
+        System.out.println("#Quiz Class running");
 
         int questionIndex = 0;
         sendQuestions.println("start");
+        System.out.println("COOOOOL");
         thread.start();
 
         while (!isTimeout) {
@@ -69,6 +73,7 @@ public class Quiz implements Runnable {
             BufferedReader readScore = new BufferedReader(new InputStreamReader(player.getInputStream()));
             String playerScore = readScore.readLine();
             score = Integer.parseInt(playerScore);
+            System.out.println(score);
             readScore.close();
         } catch (IOException e){
             e.fillInStackTrace();
@@ -77,6 +82,7 @@ public class Quiz implements Runnable {
     }
     public void setIsTimeout() {
         this.isTimeout = true;
+        System.out.println(isTimeout + "Teste mega merda");
     }
 
     public void addScore() {
