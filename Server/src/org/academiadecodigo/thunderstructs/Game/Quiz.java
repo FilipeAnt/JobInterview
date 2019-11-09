@@ -1,6 +1,6 @@
 package org.academiadecodigo.thunderstructs.Game;
 
-import org.academiadecodigo.thunderstructs.TimeCounter;
+import org.academiadecodigo.thunderstructs.Utilitary.TimeCounter;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -37,20 +37,23 @@ public class Quiz implements Runnable {
     @Override
     public void run() {
 
-        int questionNumber = 0;
+        int questionIndex = 0;
         sendQuestions.println("start");
         thread.start();
 
         while (!isTimeout) {
             //send and receive data
             try {
-                sendQuestions.println(questions[questionNumber]);
+                Thread.sleep(2000);
+                sendQuestions.println(questions[questionIndex]);
                 String answer = receiveAnswers.readLine();
                 System.out.println(answer);
 
-                questionNumber++;
+                questionIndex++;
             } catch (IOException e) {
                 e.printStackTrace();
+            } catch (InterruptedException e) {
+                System.out.println(e.getMessage());
             }
         }
 

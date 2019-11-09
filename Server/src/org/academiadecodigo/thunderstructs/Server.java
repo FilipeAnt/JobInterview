@@ -1,6 +1,7 @@
 package org.academiadecodigo.thunderstructs;
 
-import org.academiadecodigo.thunderstructs.Game.PlayerHandler;
+import org.academiadecodigo.thunderstructs.Utilitary.ServerConfiguration;
+import org.academiadecodigo.thunderstructs.Utilitary.ServerMessage;
 
 import java.io.IOException;
 import java.net.ServerSocket;

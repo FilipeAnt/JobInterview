@@ -1,4 +1,4 @@
-package org.academiadecodigo.thunderstructs;
+package org.academiadecodigo.thunderstructs.Utilitary;
 
 import java.util.concurrent.ExecutorService;
 

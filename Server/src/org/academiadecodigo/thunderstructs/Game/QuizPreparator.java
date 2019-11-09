@@ -1,8 +1,8 @@
 package org.academiadecodigo.thunderstructs.Game;
 
 import org.academiadecodigo.thunderstructs.Operations.Commands;
-import org.academiadecodigo.thunderstructs.UtilityMethods;
-import org.academiadecodigo.thunderstructs.ServerConfiguration;
+import org.academiadecodigo.thunderstructs.Utilitary.UtilityMethods;
+import org.academiadecodigo.thunderstructs.Utilitary.ServerConfiguration;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -60,7 +60,6 @@ public class QuizPreparator implements Commands {
         while (playerSocketIndex > 0) {
 
             Socket playerSocket = playerSockets[--playerSocketIndex];
-
             Quiz quiz = new Quiz(playerSocket, roundQuestions, this);
 
             cachedPool.submit(quiz);

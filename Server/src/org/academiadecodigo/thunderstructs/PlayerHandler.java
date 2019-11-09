@@ -1,4 +1,4 @@
-package org.academiadecodigo.thunderstructs.Game;
+package org.academiadecodigo.thunderstructs;
 
 import org.academiadecodigo.thunderstructs.Operations.OperationFactory;
 

@@ -1,4 +1,6 @@
-package org.academiadecodigo.thunderstructs;
+package org.academiadecodigo.thunderstructs.Utilitary;
+
+import org.academiadecodigo.thunderstructs.Utilitary.ServerConfiguration;
 
 public class ServerMessage {
 
