@@ -38,8 +38,12 @@ public class ClientQuiz {
 
         while (!(serverMessage = receiveMessage()).equals("end")) {
 
-            clientQuizMenu.update(serverMessage);
-            int answerNum = clientQuizMenu.promptQuizAnswer();
+            decryptor.update(serverMessage);
+
+            String question = decryptor.getQuestion();
+            String[] options = decryptor.getOptions();
+
+            int answerNum = clientQuizMenu.promptQuizAnswer(question, options);
 
             String answer = getAnswer(answerNum);
 
@@ -97,7 +101,7 @@ public class ClientQuiz {
     }
 
     public void addToLog(String answer) {
-        log.add(new Log(decryptor.getMessage(), decryptor.correctAnswer(), answer));
+        log.add(new Log(decryptor.getQuestion(), decryptor.correctAnswer(), answer));
     }
 
     public void presentResults() {

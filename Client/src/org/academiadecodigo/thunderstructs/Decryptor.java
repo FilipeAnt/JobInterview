@@ -10,7 +10,7 @@ public class Decryptor {
         this.questionData = serverMessage.split("#");
     }
 
-    public String getMessage() {
+    public String getQuestion() {
         return questionData[0];
     }
 
