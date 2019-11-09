@@ -48,7 +48,7 @@ public class Quiz implements Runnable {
         while (!isTimeout) {
             //send and receive data
             try {
-                Thread.sleep(2000);
+                Thread.sleep(1000);
                 sendQuestions.println(questions[questionIndex]);
                 String answer = receiveAnswers.readLine();
                 System.out.println(answer);

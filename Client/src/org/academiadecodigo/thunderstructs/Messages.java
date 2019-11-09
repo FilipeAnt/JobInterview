@@ -10,9 +10,11 @@ public class Messages {
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_YELLOW = "\u001B[33m";
     public static final String YELLOW_BOLD = "\033[1;33m"; // YELLOW
+    public static final String SCORE = "SCORE ";
     public static final String BAR = "==================================================================================================";
 
-    public static final String SPACE = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
+    public static final String SPACE = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n" +
+            "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
 
     public static final String THREE = RED + ".----------------. \n" +
             "| .--------------. |\n" +
@@ -68,4 +70,12 @@ public class Messages {
             "   ██║   ██║██║╚██╔╝██║██╔══╝      ██║   ██║██║   ██║   ██║   \n" +
             "   ██║   ██║██║ ╚═╝ ██║███████╗    ╚██████╔╝╚██████╔╝   ██║   \n" +
             "   ╚═╝   ╚═╝╚═╝     ╚═╝╚══════╝     ╚═════╝  ╚═════╝    ╚═╝  " + ANSI_RESET ;
+
+    public static final String NEXT_QUESTION = YELLOW_BOLD + "███╗   ██╗███████╗██╗  ██╗████████╗     ██████╗ ██╗   ██╗███████╗███████╗████████╗██╗ ██████╗ ███╗   ██╗\n" +
+            "████╗  ██║██╔════╝╚██╗██╔╝╚══██╔══╝    ██╔═══██╗██║   ██║██╔════╝██╔════╝╚══██╔══╝██║██╔═══██╗████╗  ██║\n" +
+            "██╔██╗ ██║█████╗   ╚███╔╝    ██║       ██║   ██║██║   ██║█████╗  ███████╗   ██║   ██║██║   ██║██╔██╗ ██║\n" +
+            "██║╚██╗██║██╔══╝   ██╔██╗    ██║       ██║▄▄ ██║██║   ██║██╔══╝  ╚════██║   ██║   ██║██║   ██║██║╚██╗██║\n" +
+            "██║ ╚████║███████╗██╔╝ ██╗   ██║       ╚██████╔╝╚██████╔╝███████╗███████║   ██║   ██║╚██████╔╝██║ ╚████║\n" +
+            "╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝   ╚═╝        ╚══▀▀═╝  ╚═════╝ ╚══════╝╚══════╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝\n" +
+            "                                                                                                        " + ANSI_RESET;
 }
