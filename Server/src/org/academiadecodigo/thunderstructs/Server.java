@@ -41,9 +41,14 @@ public class Server {
 
                 System.out.println(ServerMessage.AWAITING_CLIENT_CONNECTION);
 
-                playerSockets[playerCounter] = serverSocket.accept();
+                //playerSockets[playerCounter] = serverSocket.accept();
+
+                Socket clientSocket = serverSocket.accept();
                 System.out.println(getPlayerIPMessage());
+
+                clientsThreadPool.submit(new ClientHandler(clientSocket));//TODO: ClientHandler isn't runnable
                 playerCounter++;
+
 
                 if (playerCounter == playersPerGame) {
                     clientsThreadPool.submit(new PlayerHandler(playerSockets)); //TODO: Method
