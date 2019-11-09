@@ -7,6 +7,7 @@ public class Player {
 
     private String playerName;
     private int totalJobs;
+    private int totalPoints;
     private int pointsLastGame;
     private int pointsLastSession;
 
@@ -16,9 +17,10 @@ public class Player {
     public Player (String playerName) {
 
         this.playerName = playerName;
-        totalJobs = 0;
-        pointsLastGame = 0;
-        pointsLastSession = 0;
+        this.totalJobs = 0;
+        this.totalPoints = 0;
+        this.pointsLastGame = 0;
+        this.pointsLastSession = 0;
     }
 
     public Player (String[] playerData) {
@@ -35,4 +37,25 @@ public class Player {
         pointsLastGame = Integer.parseInt(playerData[dataIndex++]);
         pointsLastSession = Integer.parseInt(playerData[dataIndex++]);
     }
+
+    public String getPlayerName() {
+        return playerName;
+    }
+
+    public int getTotalJobs() {
+        return totalJobs;
+    }
+
+    public int getPointsLastGame() {
+        return pointsLastGame;
+    }
+
+    public int getPointsLastSession() {
+        return pointsLastSession;
+    }
+
+    public Socket getPlayerSocket() {
+        return playerSocket;
+    }
+
 }

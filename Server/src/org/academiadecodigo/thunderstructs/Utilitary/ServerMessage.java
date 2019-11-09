@@ -9,4 +9,5 @@ public class ServerMessage {
     public static final String NEW_GAME_STARTED = "A new game was launched between " + ServerConfiguration.PLAYERS_PER_GAME + " players.\n" +
             "==========================================\n";
 
+    public static final String C_NICKNAME_ALREADY_EXSITS = "/True";
 }

@@ -1,19 +1,24 @@
 package org.academiadecodigo.thunderstructs;
 
+import org.academiadecodigo.thunderstructs.Utilitary.ServerMessage;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.Socket;
 
 public class PlayerGenerator {
 
     private int clientOption;
     private Socket clientSocket;
+    private DataManager dataManager;
 
     public PlayerGenerator(String clientOption, Socket clientSocket) {
 
         this.clientOption = Integer.parseInt(clientOption);
         this.clientSocket = clientSocket;
+        this.dataManager = new DataManager();
 
     }
 
@@ -50,7 +55,15 @@ public class PlayerGenerator {
         try {
 
             BufferedReader bReader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+            PrintWriter pWriter = new PrintWriter(clientSocket.getOutputStream());
             playerName = bReader.readLine();
+
+            while (dataManager.checkIfExists(playerName)) {
+
+                playerName = bReader.readLine();
+                pWriter.println(ServerMessage.C_NICKNAME_ALREADY_EXSITS);
+
+            }
 
         } catch (IOException e) {
             e.getStackTrace();
