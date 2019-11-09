@@ -53,12 +53,13 @@ public class ClientQuiz {
 
             checkAnswer(answer);
             addToLog(answer);
+            System.out.println(Messages.SPACE + Messages.NEXT_QUESTION);
             nextQuestion();
         }
+        sendScore();
 
-        System.out.println(Messages.TIMEOUT);
-        System.out.println("YOUR RESULTS: ");
-        presentResults();
+        showResults();
+
     }
 
     public void nextQuestion() {
@@ -72,6 +73,7 @@ public class ClientQuiz {
             System.out.println(e.getMessage());
         }
     }
+
 
     public void logAnswer() {
 
@@ -112,7 +114,7 @@ public class ClientQuiz {
         log.add(new Log(decryptor.getQuestion(), decryptor.correctAnswer(), answer));
     }
 
-    public void presentResults() {
+    public void results() {
         for (Log logs : log) {
             System.out.println(logs.toString());
         }
@@ -136,11 +138,28 @@ public class ClientQuiz {
 
     }
 
+    public void showResults(){
+
+        String winner = receiveMessage();
+
+        System.out.println(Messages.SPACE + Messages.TIMEOUT + "\n\n");
+        System.out.println("YOUR RESULTS: " + score + "\n" + winner);
+        results();
+    }
+
     public int getScore() {
         return score;
     }
 
     public void sendScore(){
+        try {
+
+            PrintWriter pWriter = new PrintWriter(clientSocket.getOutputStream(), true);
+            pWriter.println(Messages.SCORE + score);
+
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
 
     }
 }
