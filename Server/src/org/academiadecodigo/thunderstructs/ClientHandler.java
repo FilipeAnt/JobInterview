@@ -20,7 +20,7 @@ public class ClientHandler {
 
             String clientOption = bReader.readLine();
             PlayerGenerator playerGenerator = new PlayerGenerator(clientOption, clientSocket);
-            Player player = playerGenerator.generatePlayer();
+            //Player player = playerGenerator.generatePlayer();
 
         } catch (IOException e) {
             e.getStackTrace();

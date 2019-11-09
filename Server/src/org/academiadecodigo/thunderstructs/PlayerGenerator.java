@@ -22,7 +22,7 @@ public class PlayerGenerator {
 
     }
 
-    public Player generatePlayer () {
+    /*public Player generatePlayer () {
 
         Player newPlayer;
 
@@ -33,11 +33,11 @@ public class PlayerGenerator {
                 break;
 
             case 2:
-                newPlayer = loginPlayer ();
+                //newPlayer = loginPlayer ();
                 break;
 
             case 3:
-                newPlayer = registerPlayer (clientSocket);
+               // newPlayer = registerPlayer (clientSocket);
                 break;
 
             default:
@@ -46,7 +46,7 @@ public class PlayerGenerator {
 
         }
         return newPlayer;
-    }
+    }*/
 
     public Player unregisteredPlayer () {
 
@@ -72,12 +72,12 @@ public class PlayerGenerator {
         return new Player(playerName);
     }
 
-    public void loginPlayer () {
+    //public void loginPlayer () {
 
 
 
-        return new Player(String username, String password);
-    }
+      //  return new Player(String username, String password);
+    //}
 
     public void registerPlayer (Socket clientSocket) {
 

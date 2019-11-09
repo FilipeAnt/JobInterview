@@ -2,11 +2,11 @@ package org.academiadecodigo.thunderstructs.Game;
 
 public class QuestionDB {
 
-    public static final int NUM_OF_QUESTIONS = 21;
+    public static final int NUM_OF_QUESTIONS = 23;
     public static final String[] QUESTIONS_DATA_BASE = new String[]{"Which of these is a pillar of OOP: #None #Retraction #Inflection #Reflection #None ",
             "Which one of these should be preferred over Inheritance: #Polymorphism #Compositon #Polyformism #Strategy #Compositon ",
             "Which of these famous MCs once said 'Tá fixe!': #Nuno #Sara #Jójó #Soraia #Jójó ",
-            "What is an object? #A variable #An instance of a class #A reference to an attribute #A tua prima #An instance of a class ",
+            "What is an object? #A variable #An instance of a class #A reference to an attribute #Your Cousin #An instance of a class ",
             "Which of these is a purpose of Encapsulation: #Scalable code #Hard to maintain #Become a cool programmer #Protect the code from others #Protect the code from others ",
             "What word would you use to describe a man who does not have all his fingers in one hand? #An idiot #A programmer #A man without fingers #A normal person #A normal person ",
             "In OOP, new classes can be defined by extending existing classes. This is an example of: #Encapsulation #Inheritance #Aggregation #Interface #Inheritance ",
@@ -23,5 +23,8 @@ public class QuestionDB {
             "Whats a good practice for programmers? #Never care about readability #Program to an Interface #Program to an Implementation #Never ask for help #Program to an Interface ",
             "Are you a programmer? #Hell yes! #I wish #Trying to #Kind of all of the above #Hell yes! ",
             "Design Patterns are divide in ___ types. Complete the sentence. #2 #3 #4 #None of the above #3 ",
-            "What are the types of Design Patterns? #Creation, Structure, Behavior #Creational, Structural, Behavioral #Architectural, Religious, Structural #Creational, Structural, Architectural #Creational, Structural, Behavioral "};
+            "What are the types of Design Patterns? #Creation, Structure, Behavior #Creational, Structural, Behavioral #Architectural, Religious, Structural #Creational, Structural, Architectural #Creational, Structural, Behavioral ",
+            "In Lithuanian how do your say: I'm the King of Kaunas? #Aš esu Kauno Karalius #Aš esu Karalhus Kaunas #Aš esu Kaunas Karalhus #None of the above #Aš esu Kauno Karalius ",
+            "How is Padawan MC Rui Sousa Nickname? #Tojó #JoJo #Ruizim #Mr. Worldwide #Tojó "
+    };
 }
