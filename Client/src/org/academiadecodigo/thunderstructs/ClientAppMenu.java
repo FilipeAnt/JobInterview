@@ -27,7 +27,7 @@ public class ClientAppMenu {
     }
 
     public int menuPrompt(String message, String[] menuOptions) {
-        System.out.println(Messages.BAR);
+        System.out.println(Messages.BAR + "\n" + Messages.BAR);
         MenuInputScanner scanner = new MenuInputScanner(menuOptions);
         scanner.setMessage(message);
 

@@ -5,7 +5,7 @@ public class Messages {
     public static final String REQUEST_NEXT_QUESTION = "/Next question";
     public static final String RED = "\u001b[31m";
     public static final String BLUE = "\u001B[34m";
-    public static final String GREEN = "\u001b[32m";
+    public static final String GREEN = "\u001B[32m";
     public static final String BLACK_BACKGROUND = "\033[40m";  // BLACK
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_YELLOW = "\u001B[33m";

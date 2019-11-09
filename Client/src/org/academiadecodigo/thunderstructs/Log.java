@@ -10,14 +10,18 @@ public class Log {
     public Log(String question, String correctAnswer, String userAnswer) {
         this.question = question;
         this.correctAnswer = correctAnswer;
-        this.userAnswer = userAnswer;
+        if (userAnswer.equals(correctAnswer)) {
+            this.userAnswer = Messages.GREEN + userAnswer + Messages.ANSI_RESET + "\n";
+        } else {
+            this.userAnswer = Messages.RED + userAnswer + Messages.ANSI_RESET + "\n";
+        }
     }
 
 
     @Override
     public String toString() {
-        return "" + question + '\'' +
-                " | Correct Answer: " + correctAnswer + '\'' +
-                " | User Answer: " + userAnswer + '\'' + "|";
+        return "" + question +
+                " | Correct Answer: " + correctAnswer +
+                " | User Answer: " + userAnswer;
     }
 }
