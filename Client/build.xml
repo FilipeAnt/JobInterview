@@ -3,7 +3,7 @@
     <target name="init" description="Init all the properties">
         <property name="project.name" value="Client"/>
         <property name="src.dir" value="src"/>
-        <property name="main.class" value="org.academiadecodigo.thunderstructs.Main"/>
+        <property name="main.class" value="org.academiadecodigo.thunderstructs.Client"/>
         <property name="build.dir" value="build"/>
         <property name="classes.dir" value="${build.dir}/classes"/>
         <property name="resources.dir" value="resources"/>

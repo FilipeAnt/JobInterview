@@ -1,7 +1,9 @@
 package org.academiadecodigo.thunderstructs;
 
-import org.academiadecodigo.bootcamp.Prompt;
-import org.academiadecodigo.bootcamp.scanners.menu.MenuInputScanner;
+import org.academiadecodigo.thunderstructs.Utility.Decryptor;
+import org.academiadecodigo.thunderstructs.Utility.Log;
+import org.academiadecodigo.thunderstructs.Utility.Messages;
+import org.academiadecodigo.thunderstructs.Menus.ClientQuizMenu;
 
 import java.io.*;
 import java.net.Socket;
@@ -9,32 +11,30 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class ClientQuiz {
-    private Prompt prompt;
-    private MenuInputScanner menu;
-    private BufferedReader reader; //delete
-    private PrintWriter requestNextAnswer;
-    private Decryptor decryptor; //decryptor DELETE
+
+    private Decryptor decryptor;
     private int score = 0;
     private List<Log> log;
     private ClientQuizMenu clientQuizMenu;
     private Socket clientSocket;
 
+
     public ClientQuiz() {
-        prompt = new Prompt(System.in, System.out);
-        decryptor = new Decryptor(); //DELETE
+        decryptor = new Decryptor();
         log = new LinkedList<>();
         clientQuizMenu = new ClientQuizMenu();
     }
 
-    public void start(Socket socket) { //init
+
+    public void start(Socket socket) {
         this.clientSocket = socket;
         question();
     }
 
 
-    public void question() {
+    private void question() {
 
-        String serverMessage = "";
+        String serverMessage;
 
         countdown();
 
@@ -52,47 +52,38 @@ public class ClientQuiz {
             String answer = getAnswer(answerNum);
 
             checkAnswer(answer);
+
             addToLog(answer);
+
             System.out.println(Messages.SPACE + Messages.NEXT_QUESTION);
+
             nextQuestion();
         }
+
         sendScore();
 
         showResults();
-
     }
 
-    public void nextQuestion() {
+
+    private void nextQuestion() {
 
         try {
-
             PrintWriter pWriter = new PrintWriter(clientSocket.getOutputStream(), true);
             pWriter.println(Messages.REQUEST_NEXT_QUESTION);
-
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
     }
 
 
-    public void logAnswer() {
-
-        //   log.add(answer)
-
-    }
-
-
-    public String receiveMessage() {
+    private String receiveMessage() {
 
         String receivedMessage = "";
+
         try {
-
             BufferedReader bReader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-
-
-
             receivedMessage = bReader.readLine();
-
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -100,25 +91,30 @@ public class ClientQuiz {
         return receivedMessage;
     }
 
-    public String getAnswer(int answerNumber) {
+
+    private String getAnswer(int answerNumber) {
         return decryptor.getOptions()[answerNumber - 1];
     }
 
-    public void checkAnswer(String answer) {
+
+    private void checkAnswer(String answer) {
         if (answer.equals(decryptor.correctAnswer())) {
             score++;
         }
     }
 
-    public void addToLog(String answer) {
+
+    private void addToLog(String answer) {
         log.add(new Log(decryptor.getQuestion(), decryptor.correctAnswer(), answer));
     }
 
-    public void results() {
+
+    private void results() {
         for (Log logs : log) {
             System.out.println(logs.toString());
         }
     }
+
 
     private void countdown() {
         try {
@@ -135,27 +131,23 @@ public class ClientQuiz {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
     }
 
-    public void showResults(){
 
-        String winner = receiveMessage();
+    private void showResults() {
 
         System.out.println(Messages.SPACE + Messages.TIMEOUT + "\n\n");
-        System.out.println("YOUR RESULTS: " + score + "\n" + winner);
+        System.out.println("YOUR RESULTS: " + score + "\n");
+
         results();
     }
 
-    public int getScore() {
-        return score;
-    }
 
-    public void sendScore(){
-        try{
-            PrintWriter sendScore = new PrintWriter(new OutputStreamWriter(clientSocket.getOutputStream()),true);
+    private void sendScore() {
+        try {
+            PrintWriter sendScore = new PrintWriter(new OutputStreamWriter(clientSocket.getOutputStream()), true);
             sendScore.println(score);
-        } catch (IOException e){
+        } catch (IOException e) {
             e.getMessage();
         }
     }

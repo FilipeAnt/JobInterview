@@ -1,5 +1,6 @@
 package org.academiadecodigo.thunderstructs.Game;
 
+
 public class QuestionDB {
 
     public static final int NUM_OF_QUESTIONS = 34;

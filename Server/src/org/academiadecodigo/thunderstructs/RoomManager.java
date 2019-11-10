@@ -13,7 +13,7 @@ public class RoomManager implements Runnable {
     public static Player[][] gameRooms;
 
 
-    public RoomManager(LinkedList<Player> onlinePlayers) {
+    public RoomManager() {
 
         this.singleRoom = new Player[1];
         this.twoPlayersRoom = new Player[2];
@@ -36,14 +36,13 @@ public class RoomManager implements Runnable {
                 if (gameRooms[i][lastIndex] != null) {
 
                     new QuizPreparator(gameRooms[i]).run();
-                    //clientsThreadPool.submit(new PlayerHandler(gameRooms[i]));
                     resetRoom(i);
                 }
             }
         }
     }
 
-    public void checkOfflinePlayers(Player[] room) {
+    private void checkOfflinePlayers(Player[] room) {
 
         for (int i = 0; i < room.length; i++) {
 
@@ -58,7 +57,7 @@ public class RoomManager implements Runnable {
         }
     }
 
-    public void removeOfflinePlayer (Player[] room, int offlinePlayerIndex) {
+    private void removeOfflinePlayer (Player[] room, int offlinePlayerIndex) {
 
         for (int i = offlinePlayerIndex ; i < room.length; i++ ) {
 
@@ -67,7 +66,6 @@ public class RoomManager implements Runnable {
             room[i + 1] = null;
             return;
         }
-        System.out.println("Offline player removed.");
     }
 
     public void resetRoom (int i) {

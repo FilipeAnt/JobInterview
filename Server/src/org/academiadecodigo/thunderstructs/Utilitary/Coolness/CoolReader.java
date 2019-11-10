@@ -7,17 +7,6 @@ public class CoolReader {
 
     private BufferedReader bReader;
 
-    public CoolReader(String filePath) {
-
-        try {
-
-            this.bReader = new BufferedReader(new FileReader(filePath));
-
-        } catch (FileNotFoundException e) {
-            System.out.println(e.getStackTrace());
-        }
-    }
-
     public CoolReader(Socket socket) {
 
         try {
@@ -28,6 +17,7 @@ public class CoolReader {
             System.out.println(e.getStackTrace());
         }
     }
+
 
     public String readLine () {
 
@@ -44,19 +34,4 @@ public class CoolReader {
         return readLine;
     }
 
-    public void close () {
-
-        try {
-
-            bReader.close();
-
-        } catch (IOException e) {
-            System.out.println(e.getStackTrace());
-        }
-    }
-
-    public void whichIsCoolestReader() {
-
-        System.out.println("This reader is the coolest reader. By far.");
-    }
 }
