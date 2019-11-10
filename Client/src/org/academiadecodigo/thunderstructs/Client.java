@@ -13,7 +13,7 @@ public class Client {
     private String adress;
     private BufferedReader reader;
     private ClientQuiz quiz;
-    private Prompt prompt = new Prompt(System.in,System.out);
+    private Prompt prompt = new Prompt(System.in, System.out);
 
 
     public Client() {
@@ -44,9 +44,12 @@ public class Client {
             e.printStackTrace();
         }
     }
+
     public void listen() {
         String input;
-        System.out.println("Conected!!!!Waiting for second player...");
+
+        waitingMessage();
+
         try {
             reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             input = reader.readLine();
@@ -67,15 +70,45 @@ public class Client {
 
 
     public void initialMenu() {
-        String[] options = {"Launch as guest","Login","Register","Exit"};
+        String[] options = {"Launch as guest", "Login", "Register", "Exit"};
         MenuInputScanner initialMenu = new MenuInputScanner(options);
         initialMenu.setMessage("Choose:");
         int answer = prompt.getUserInput(initialMenu);
         try {
-            PrintWriter option = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()),true);
+            PrintWriter option = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()), true);
             option.println(answer);
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        if (answer == 1) {
+            nickname();
+        }
+
+        if (answer == 4) {
+            System.exit(0);
+        }
+    }
+
+    public void nickname() {
+
+        System.out.println(Messages.SPACE);
+        Scanner name = new Scanner(System.in);
+        System.out.println(Messages.CHOOSE_NAME);
+        String nickname = name.nextLine();
+
+        try {
+            PrintWriter nameWriter = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()), true);
+            nameWriter.println(nickname);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void waitingMessage() {
+
+        System.out.println(Messages.SPACE + Messages.GREEN + Messages.CONNECTED + Messages.ANSI_RESET);
+        System.out.println(Messages.ANSI_YELLOW + Messages.WAITING + Messages.ANSI_RESET);
+
     }
 }

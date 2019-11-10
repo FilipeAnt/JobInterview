@@ -38,7 +38,13 @@ public class PlayerGenerator {
 
             case 3:
                 //newPlayer = registerPlayer (clientSocket);
-
+            case 4:
+                try {
+                    clientSocket.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                newPlayer = null;
             default:
                 newPlayer = unregisteredPlayer();
                 break;
@@ -51,11 +57,11 @@ public class PlayerGenerator {
 
         String playerName = "";
 
-        //try {
+        try {
 
-            //BufferedReader bReader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-            //PrintWriter pWriter = new PrintWriter(clientSocket.getOutputStream());
-            playerName = "HOHO";//bReader.readLine();
+            BufferedReader bReader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+            playerName = bReader.readLine();
+            System.out.println("playerName");
 
             //while (dataManager.checkIfExists(playerName)) {
 
@@ -64,9 +70,9 @@ public class PlayerGenerator {
 
             //}
 
-        //} catch (IOException e) {
-          //  e.getStackTrace();
-        //}
+        } catch (IOException e) {
+            e.getStackTrace();
+        }
 
         return new Player(playerName, clientSocket);
     }
