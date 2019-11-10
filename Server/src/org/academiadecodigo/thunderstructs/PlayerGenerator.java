@@ -11,26 +11,24 @@ import java.net.Socket;
 
 public class PlayerGenerator {
 
-    private int clientOption;
     private Socket clientSocket;
     private DataManager dataManager;
 
-    public PlayerGenerator(String clientOption, Socket clientSocket) {
+    public PlayerGenerator() {
 
-        this.clientOption = Integer.parseInt(clientOption);
         this.clientSocket = clientSocket;
         this.dataManager = new DataManager();
 
     }
 
-    public Player generatePlayer () {
+    public void generatePlayer (int clientOption, Player player) {
 
         Player newPlayer;
 
         switch (clientOption) {
 
             case 1:
-                newPlayer = unregisteredPlayer();
+                unregisteredPlayer(player);
                 break;
 
             case 2:
@@ -40,14 +38,13 @@ public class PlayerGenerator {
                 //newPlayer = registerPlayer (clientSocket);
 
             default:
-                newPlayer = unregisteredPlayer();
+                unregisteredPlayer(player);
                 break;
 
         }
-        return newPlayer;
     }
 
-    public Player unregisteredPlayer () {
+    public void unregisteredPlayer (Player player) {
 
         String playerName = "";
 
@@ -55,8 +52,9 @@ public class PlayerGenerator {
 
             //BufferedReader bReader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             //PrintWriter pWriter = new PrintWriter(clientSocket.getOutputStream());
-            playerName = "HOHO";//bReader.readLine();
+            player.setPlayerName("HOHO");//bReader.readLine();
 
+            player.setIsReady(true);
             //while (dataManager.checkIfExists(playerName)) {
 
               //  pWriter.println(ServerMessage.C_NICKNAME_ALREADY_EXSITS);
@@ -68,7 +66,6 @@ public class PlayerGenerator {
           //  e.getStackTrace();
         //}
 
-        return new Player(playerName, clientSocket);
     }
 
 

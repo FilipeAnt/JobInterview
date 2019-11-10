@@ -12,6 +12,7 @@ public class Player {
     private int pointsLastSession;
     private int roundPoints;
     private Socket playerSocket;
+    private boolean isReady = false;
 
 
     public Player (String playerName, Socket socket) {
@@ -61,5 +62,17 @@ public class Player {
 
     public void setRoundPoints(int roundPoints) {
         this.roundPoints = roundPoints;
+    }
+
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
+    }
+
+    public void setIsReady(boolean setter){
+        this.isReady = setter;
+    }
+
+    public boolean getIsReady(){
+        return this.isReady;
     }
 }

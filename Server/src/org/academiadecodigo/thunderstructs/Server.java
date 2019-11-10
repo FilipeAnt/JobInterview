@@ -30,6 +30,7 @@ public class Server {
             playersPerGame = ServerConfiguration.PLAYERS_PER_GAME;
             serverSocket = new ServerSocket(ServerConfiguration.PORT_NUMBER);
             this.playerSockets = new Socket[ServerConfiguration.PLAYERS_PER_GAME];
+            this.onlinePlayers = new LinkedList<>();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -40,14 +41,16 @@ public class Server {
 
         try {
 
+            clientsThreadPool.submit(new RoomManager(onlinePlayers));
+
             while (serverSocket.isBound()) {
 
                 System.out.println(ServerMessage.AWAITING_CLIENT_CONNECTION);
                 Socket clientSocket = serverSocket.accept();
-
-                String playerName = "Guest" + playerCounter;
+                System.out.println("Connection accepted");
+                String playerName = "Temp" + playerCounter;
                 onlinePlayers.add( new Player(playerName, clientSocket));
-
+                System.out.println("DONE");
                 clientsThreadPool.submit(new ClientHandler(onlinePlayers.getLast(), this));
                 playerCounter++;
 

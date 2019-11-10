@@ -10,10 +10,15 @@ public class ClientHandler implements Runnable {
     private Socket clientSocket;
     private BufferedReader bReader;
     private Server server;
+    private PlayerGenerator playerGenerator;
+    private Player player;
+
 
     public ClientHandler (Player player, Server server) {
 
+        this.player = player;
         this.clientSocket = player.getPlayerSocket();
+        this.playerGenerator = new PlayerGenerator();
 
         try {
             this.bReader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
@@ -30,12 +35,12 @@ public class ClientHandler implements Runnable {
         try {
 
             String clientOption = bReader.readLine();//1
-            System.out.println(clientOption);
+            int clientOption2 = Integer.parseInt(clientOption);
+            System.out.println(clientOption);//1
 
-            PlayerGenerator playerGenerator = new PlayerGenerator(clientOption, clientSocket);
-            Player player = playerGenerator.generatePlayer();
+            playerGenerator.generatePlayer(clientOption2, player);
             System.out.println(player.getPlayerName());
-            server.getFancyPlayers()[server.getPlayerCounter() - 1] = player;
+            //server.getFancyPlayers()[server.getPlayerCounter() - 1] = player;
 
         } catch (IOException e) {
             e.getStackTrace();
