@@ -9,12 +9,11 @@ public class ClientHandler implements Runnable {
 
     private Socket clientSocket;
     private BufferedReader bReader;
-    private Server server;
     private PlayerGenerator playerGenerator;
     private Player player;
 
 
-    public ClientHandler (Player player, Server server) {
+    public ClientHandler (Player player) {
 
         this.player = player;
         this.clientSocket = player.getPlayerSocket();
@@ -25,10 +24,6 @@ public class ClientHandler implements Runnable {
         } catch (IOException e) {
             System.out.println(e.getStackTrace());
         }
-
-
-        this.clientSocket = clientSocket;
-        this.server = server;
     }
 
     public void loginOption () {
@@ -40,7 +35,6 @@ public class ClientHandler implements Runnable {
 
             playerGenerator.generatePlayer(clientOption2, player);
             System.out.println(player.getPlayerName());
-            //server.getFancyPlayers()[server.getPlayerCounter() - 1] = player;
 
         } catch (IOException e) {
             e.getStackTrace();

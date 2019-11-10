@@ -50,13 +50,9 @@ public class Server {
                 System.out.println("Connection accepted");
                 String playerName = "Temp" + playerCounter;
                 onlinePlayers.add( new Player(playerName, clientSocket));
-                clientsThreadPool.submit(new ClientHandler(onlinePlayers.getLast(), this));
+                clientsThreadPool.submit(new ClientHandler(onlinePlayers.getLast()));
                 playerCounter++;
 
-        /*        if (fancyPlayers[1] != null) {
-
-                    clientsThreadPool.submit(new PlayerHandler(fancyPlayers));
-                }*/
             }
 
         } catch (IOException e) {
