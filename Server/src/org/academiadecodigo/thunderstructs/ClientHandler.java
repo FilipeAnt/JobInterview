@@ -11,7 +11,9 @@ public class ClientHandler implements Runnable {
     private BufferedReader bReader;
     private Server server;
 
-    public ClientHandler (Socket clientSocket, Server server) {
+    public ClientHandler (Player player, Server server) {
+
+        this.clientSocket = player.getPlayerSocket();
 
         try {
             this.bReader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
@@ -25,7 +27,6 @@ public class ClientHandler implements Runnable {
     }
 
     public void loginOption () {
-        System.out.println("Teste#1");
         try {
 
             String clientOption = bReader.readLine();//1
@@ -34,8 +35,7 @@ public class ClientHandler implements Runnable {
             PlayerGenerator playerGenerator = new PlayerGenerator(clientOption, clientSocket);
             Player player = playerGenerator.generatePlayer();
             System.out.println(player.getPlayerName());
-            server.getFancyPlayers()[Server.playerCounter - 1] = player;
-            System.out.println("Player added");
+            server.getFancyPlayers()[server.getPlayerCounter() - 1] = player;
 
         } catch (IOException e) {
             e.getStackTrace();

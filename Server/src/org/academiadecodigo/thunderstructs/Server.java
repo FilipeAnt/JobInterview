@@ -2,22 +2,24 @@ package org.academiadecodigo.thunderstructs;
 
 import org.academiadecodigo.thunderstructs.Utilitary.ServerConfiguration;
 import org.academiadecodigo.thunderstructs.Utilitary.ServerMessage;
-
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.LinkedList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Server {
 
 
-    public static int playerCounter;
+    private int playerCounter;
     private ServerSocket serverSocket;
     private Socket[] playerSockets;
     private ExecutorService clientsThreadPool;
     private int playersPerGame;
     private Player[] fancyPlayers = new Player[2];
+
+    private LinkedList<Player> onlinePlayers;
 
 
     public Server() {
@@ -41,28 +43,17 @@ public class Server {
             while (serverSocket.isBound()) {
 
                 System.out.println(ServerMessage.AWAITING_CLIENT_CONNECTION);
-
-                //playerSockets[playerCounter] = serverSocket.accept();
-
                 Socket clientSocket = serverSocket.accept();
-                //System.out.println(getPlayerIPMessage());
 
+                String playerName = "Guest" + playerCounter;
+                onlinePlayers.add( new Player(playerName, clientSocket));
 
-                clientsThreadPool.submit(new ClientHandler(clientSocket, this));//TODO: ClientHandler isn't runnable
+                clientsThreadPool.submit(new ClientHandler(onlinePlayers.getLast(), this));
                 playerCounter++;
 
+        /*        if (fancyPlayers[1] != null) {
 
-                if (fancyPlayers[1] != null) {
-                    System.out.println("hehe");
                     clientsThreadPool.submit(new PlayerHandler(fancyPlayers));
-
-                }
-
-
-/*                if (playerCounter == playersPerGame) {
-                    clientsThreadPool.submit(new PlayerHandler(playerSockets)); //TODO: Method
-                    System.out.println(ServerMessage.NEW_GAME_STARTED);
-                    playerCounter = 0;
                 }*/
             }
 
@@ -78,5 +69,13 @@ public class Server {
 
     public Player[] getFancyPlayers() {
         return this.fancyPlayers;
+    }
+
+    public LinkedList<Player> getOnlinePlayers () {
+        return this.onlinePlayers;
+    }
+
+    public int getPlayerCounter() {
+        return playerCounter;
     }
 }
