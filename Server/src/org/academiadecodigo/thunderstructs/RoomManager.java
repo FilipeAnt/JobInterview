@@ -19,7 +19,6 @@ public class RoomManager implements Runnable {
     public void run() {
 
         Player[] gamePlayers = new Player[2];
-        System.out.println("cucu");
         while (true) {
 
             //System.out.println(onlinePlayers.size());
@@ -34,15 +33,11 @@ public class RoomManager implements Runnable {
                 int size = onlinePlayers.size();
                 gamePlayers[0] = onlinePlayers.getLast();
                 gamePlayers[1] = onlinePlayers.getFirst();
-                System.out.println("entrou o caralho");
 
                 if (gamePlayers[0].getIsReady() && gamePlayers[1].getIsReady()) {
 
-                    System.out.println("saiu o caralho");
                     clientsThreadPool.submit(new PlayerHandler(gamePlayers));
-                    System.out.println("antes de se foder");
                     gamePlayers[1].setIsReady(false);
-                    System.out.println("fodeu se ao cubo");
                 }
 
             }

@@ -50,7 +50,6 @@ public class Server {
                 System.out.println("Connection accepted");
                 String playerName = "Temp" + playerCounter;
                 onlinePlayers.add( new Player(playerName, clientSocket));
-                System.out.println("DONE");
                 clientsThreadPool.submit(new ClientHandler(onlinePlayers.getLast(), this));
                 playerCounter++;
 
