@@ -18,7 +18,7 @@ public class ClientHandler implements Runnable {
 
         this.player = player;
         this.clientSocket = player.getPlayerSocket();
-        this.playerGenerator = new PlayerGenerator();
+        this.playerGenerator = new PlayerGenerator(player);
 
         try {
             this.bReader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));

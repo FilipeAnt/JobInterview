@@ -17,6 +17,7 @@ public class PlayerHandler implements Runnable {
 
     @Override
     public void run() {
+
         actions++;
         operations.execute(actions, players);
     }

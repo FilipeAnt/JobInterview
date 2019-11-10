@@ -14,9 +14,9 @@ public class PlayerGenerator {
     private Socket clientSocket;
     private DataManager dataManager;
 
-    public PlayerGenerator() {
+    public PlayerGenerator(Player player) {
 
-        this.clientSocket = clientSocket;
+        this.clientSocket = player.getPlayerSocket();
         this.dataManager = new DataManager();
 
     }
@@ -48,23 +48,27 @@ public class PlayerGenerator {
 
         String playerName = "";
 
-        //try {
-
-            //BufferedReader bReader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+        try {
+            System.out.println("TESTE DO CARALHO");
+            BufferedReader bReader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             //PrintWriter pWriter = new PrintWriter(clientSocket.getOutputStream());
-            player.setPlayerName("HOHO");//bReader.readLine();
+            System.out.println("HEHEHEH");
+            player.setPlayerName(bReader.readLine());
+            System.out.println("hehe");
+            System.out.println(player.getPlayerName());
+ /*           while (dataManager.checkIfExists(playerName)) {
+
+               // pWriter.println(ServerMessage.C_NICKNAME_ALREADY_EXSITS);
+                playerName = bReader.readLine();
+
+            }*/
 
             player.setIsReady(true);
-            //while (dataManager.checkIfExists(playerName)) {
+            System.out.println(player.getIsReady());
 
-              //  pWriter.println(ServerMessage.C_NICKNAME_ALREADY_EXSITS);
-               // playerName = bReader.readLine();
-
-            //}
-
-        //} catch (IOException e) {
-          //  e.getStackTrace();
-        //}
+        } catch (IOException e) {
+            e.getStackTrace();
+        }
 
     }
 
