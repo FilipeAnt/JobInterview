@@ -27,9 +27,6 @@ public class QuizPreparator implements Commands {
 
         this.players = playerSockets;
         this.roundQuestions = new String[ServerConfiguration.QUESTIONS_PER_ROUND];
-        //this.playerScoreMap = new HashMap<>();
-        //this.playerScoreMap.put(playerSockets[0], ServerConfiguration.DEFAULT_SCORE);
-        //this.playerScoreMap.put(playerSockets[1], ServerConfiguration.DEFAULT_SCORE);
         this.cachedPool = Executors.newCachedThreadPool();
     }
 
@@ -71,11 +68,11 @@ public class QuizPreparator implements Commands {
 
     public void startQuizz(Player[] players) {
 
-        int playerSocketIndex = ServerConfiguration.PLAYERS_PER_GAME;
+        int playerSocketIndex = (players.length - 1); //last player               //ServerConfiguration.PLAYERS_PER_GAME;
         System.out.println("inside StartQuizz");
-        while (playerSocketIndex > 0) {
+        while (playerSocketIndex >= 0) {
 
-            Socket playerSocket = players[--playerSocketIndex].getPlayerSocket();
+            Socket playerSocket = players[playerSocketIndex].getPlayerSocket();
 
             System.out.println(playerSocketIndex);
             System.out.println(players[playerSocketIndex].getPlayerName());
@@ -83,6 +80,8 @@ public class QuizPreparator implements Commands {
             Quiz quiz = new Quiz(playerSocket, roundQuestions, this);
             System.out.println("Quiz created!");
             cachedPool.submit(quiz);
+
+            playerSocketIndex--;
         }
     }
 

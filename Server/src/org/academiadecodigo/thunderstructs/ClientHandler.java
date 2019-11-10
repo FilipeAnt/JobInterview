@@ -1,55 +1,63 @@
 package org.academiadecodigo.thunderstructs;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import org.academiadecodigo.thunderstructs.Utilitary.Coolness.CoolReader;
+
 import java.net.Socket;
 
 public class ClientHandler implements Runnable {
 
     private Socket clientSocket;
-    private BufferedReader bReader;
-    private Server server;
-    private PlayerGenerator playerGenerator;
+    private CoolReader cReader;
+    private PlayerConfigurator playerConfigurator;
     private Player player;
 
 
-    public ClientHandler (Player player, Server server) {
+    public ClientHandler (Player player) {
 
         this.player = player;
         this.clientSocket = player.getPlayerSocket();
-        this.playerGenerator = new PlayerGenerator(player);
-
-        try {
-            this.bReader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-        } catch (IOException e) {
-            System.out.println(e.getStackTrace());
-        }
-
-
-        this.clientSocket = clientSocket;
-        this.server = server;
+        this.playerConfigurator = new PlayerConfigurator(player);
+        this.cReader = new CoolReader(clientSocket);
     }
 
     public void loginOption () {
-        try {
 
-            String clientOption = bReader.readLine();//1
-            int clientOption2 = Integer.parseInt(clientOption);
-            System.out.println(clientOption);//1
+            String clientOption = cReader.readLine();
+            int loginOption = Integer.parseInt(clientOption);
 
-            playerGenerator.generatePlayer(clientOption2, player);
+            playerConfigurator.loginOption(loginOption, player);
             System.out.println(player.getPlayerName());
-            //server.getFancyPlayers()[server.getPlayerCounter() - 1] = player;
+    }
 
-        } catch (IOException e) {
-            e.getStackTrace();
+    public void addToRoom () {
+
+        String clientOption = cReader.readLine();
+        int roomOption = Integer.parseInt(clientOption) - 1;
+
+        addToIndex(roomOption);
+
+        System.out.println(player.getPlayerName() + " chose a " + roomOption + " players room.");
+    }
+
+    public void addToIndex(int roomOption) {
+
+        for (int i = 0; i < RoomManager.gameRooms[roomOption].length; i++) {
+
+            if (RoomManager.gameRooms[roomOption][i] == null) {
+
+                RoomManager.gameRooms[roomOption][i] = player;
+                System.out.println(RoomManager.gameRooms[roomOption].length + " deveria ser 1");
+                break;
+            }
         }
     }
+
 
     @Override
     public void run () {
 
         loginOption();
+        addToRoom();
+        //RoomManager.singleRoom[0] = player;
     }
 }

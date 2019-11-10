@@ -24,9 +24,8 @@ public class Client {
         welcomeMessage();
         connect();
         initialMenu();
+        chooseRoom();
         listen();
-
-
     }
 
     public void welcomeMessage() {
@@ -88,6 +87,22 @@ public class Client {
         if (answer == 4) {
             System.exit(0);
         }
+    }
+
+    public void chooseRoom () {
+
+        String[] options = {"Single Player / Training Mode", "Two Players", "Four Players", "Six Players"}; //TODO: server messages
+        MenuInputScanner roomMenu = new MenuInputScanner(options);
+        roomMenu.setMessage("Choose a room:");
+        int answer = prompt.getUserInput(roomMenu);
+
+        try {
+            PrintWriter option = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()), true);
+            option.println(answer);
+        }catch (IOException e)  {
+            e.printStackTrace();
+        }
+
     }
 
     public void nickname() {

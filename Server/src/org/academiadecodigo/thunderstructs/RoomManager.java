@@ -8,14 +8,70 @@ public class RoomManager implements Runnable {
 
     private LinkedList<Player> onlinePlayers;
     private ExecutorService clientsThreadPool;
+    public static Player[] singleRoom;
+    public static Player[] twoPlayersRoom;
+    public static Player[] fourPlayersRoom;
+    public static Player[] sixPlayersRoom;
+    public static Player[][] gameRooms;
+
 
     public RoomManager(LinkedList<Player> onlinePlayers) {
 
         this.onlinePlayers = onlinePlayers;
         this.clientsThreadPool = Executors.newCachedThreadPool();
+        this.singleRoom = new Player[1];
+        this.twoPlayersRoom = new Player[2];
+        this.fourPlayersRoom = new Player[4];
+        this.sixPlayersRoom = new Player[6];
+        this.gameRooms = new Player[][]{singleRoom, twoPlayersRoom, fourPlayersRoom, sixPlayersRoom };
+
     }
 
     @Override
+    public void run () {
+
+        while (true) {
+
+            for (int i = 0; i < gameRooms.length; i++) {
+
+                int lastIndex = gameRooms[i].length - 1;
+
+                if (gameRooms[i][lastIndex] != null) {
+                    System.out.println("Olá");
+                    clientsThreadPool.submit(new PlayerHandler(gameRooms[i]));
+                    resetRoom(i);
+                }
+            }
+        }
+    }
+
+    public void resetRoom (int i) { //TODO: method for all which requires method to initialize nested arrays without names;
+
+        switch (gameRooms[i].length) {
+
+            case 1:
+                singleRoom = new Player[1];
+                gameRooms[i] = singleRoom;
+                break;
+
+            case 2:
+                twoPlayersRoom = new Player[2];
+                gameRooms[i] = twoPlayersRoom;
+                break;
+
+            case 3:
+                fourPlayersRoom = new Player[4];
+                gameRooms[i] = fourPlayersRoom;
+                break;
+
+            case 4:
+                sixPlayersRoom = new Player[6];
+                gameRooms[i] = sixPlayersRoom;
+                break;
+        }
+    }
+
+/*    @Override
     public void run() {
 
         Player[] gamePlayers = new Player[2];
@@ -39,26 +95,7 @@ public class RoomManager implements Runnable {
                     clientsThreadPool.submit(new PlayerHandler(gamePlayers));
                     gamePlayers[1].setIsReady(false);
                 }
-
             }
-
-
         }
-    }
-    // if (onlinePlayers.getLast().getPlayerName().equals("HOHO")) {
-
-
-    //}
-
-
-    // for (Player p : onlinePlayers) {
-
-
-    //}
-
-
-            /*        if (fancyPlayers[1] != null) {
-
-                    clientsThreadPool.submit(new PlayerHandler(fancyPlayers));
-                }*/
+    }*/
 }
