@@ -35,9 +35,10 @@ public class RoomManager implements Runnable {
             for (int i = 0; i < gameRooms.length; i++) {
 
                 int lastIndex = gameRooms[i].length - 1;
+                checkOfflinePlayers(gameRooms[i]);
 
                 if (gameRooms[i][lastIndex] != null) {
-                    System.out.println("Olá");
+
                     clientsThreadPool.submit(new PlayerHandler(gameRooms[i]));
                     resetRoom(i);
                 }
@@ -45,7 +46,30 @@ public class RoomManager implements Runnable {
         }
     }
 
-    public void resetRoom (int i) { //TODO: method for all which requires method to initialize nested arrays without names;
+    public void checkOfflinePlayers(Player[] room) {
+
+        for (int i = 0; i < room.length; i++) {
+
+            if (!room[i].getPlayerSocket().isBound()) {
+
+                removeOfflinePlayer(room, i);
+            }
+        }
+    }
+
+    public void removeOfflinePlayer (Player[] room, int offlinePlayerIndex) {
+
+        for (int i = offlinePlayerIndex ; i < room.length; i++ ) {
+
+            Player nextPlayer = room[i + 1];
+            room[i] = nextPlayer;
+            room[i + 1] = null;
+            return;
+        }
+        System.out.println("Offline player removed.");
+    }
+
+    public void resetRoom (int i) {
 
         switch (gameRooms[i].length) {
 
@@ -70,32 +94,4 @@ public class RoomManager implements Runnable {
                 break;
         }
     }
-
-/*    @Override
-    public void run() {
-
-        Player[] gamePlayers = new Player[2];
-        while (true) {
-
-            //System.out.println(onlinePlayers.size());
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-            if (onlinePlayers.size() == 2) {
-
-                int size = onlinePlayers.size();
-                gamePlayers[0] = onlinePlayers.getLast();
-                gamePlayers[1] = onlinePlayers.getFirst();
-
-                if (gamePlayers[0].getIsReady() && gamePlayers[1].getIsReady()) {
-
-                    clientsThreadPool.submit(new PlayerHandler(gamePlayers));
-                    gamePlayers[1].setIsReady(false);
-                }
-            }
-        }
-    }*/
 }
