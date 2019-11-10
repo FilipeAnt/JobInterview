@@ -1,15 +1,14 @@
 package org.academiadecodigo.thunderstructs;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import org.academiadecodigo.thunderstructs.Utilitary.Coolness.CoolReader;
+
 import java.net.Socket;
 
 public class ClientHandler implements Runnable {
 
     private Socket clientSocket;
-    private BufferedReader bReader;
-    private PlayerGenerator playerGenerator;
+    private CoolReader cReader;
+    private PlayerConfigurator playerGenerator;
     private Player player;
 
 
@@ -17,28 +16,18 @@ public class ClientHandler implements Runnable {
 
         this.player = player;
         this.clientSocket = player.getPlayerSocket();
-        this.playerGenerator = new PlayerGenerator(player);
-
-        try {
-            this.bReader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-        } catch (IOException e) {
-            System.out.println(e.getStackTrace());
-        }
+        this.playerGenerator = new PlayerConfigurator(player);
+        this.cReader = new CoolReader(clientSocket);
     }
 
     public void loginOption () {
-        try {
 
-            String clientOption = bReader.readLine();//1
+            String clientOption = cReader.readLine();
             int clientOption2 = Integer.parseInt(clientOption);
-            System.out.println(clientOption);//1
+            System.out.println(clientOption);
 
-            playerGenerator.generatePlayer(clientOption2, player);
+            playerGenerator.loginOption(clientOption2, player);
             System.out.println(player.getPlayerName());
-
-        } catch (IOException e) {
-            e.getStackTrace();
-        }
     }
 
     @Override

@@ -9,21 +9,18 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-public class PlayerGenerator {
+public class PlayerConfigurator {
 
     private Socket clientSocket;
     private DataManager dataManager;
 
-    public PlayerGenerator(Player player) {
+    public PlayerConfigurator(Player player) {
 
         this.clientSocket = player.getPlayerSocket();
         this.dataManager = new DataManager();
-
     }
 
-    public void generatePlayer (int clientOption, Player player) {
-
-        Player newPlayer;
+    public void loginOption(int clientOption, Player player) {
 
         switch (clientOption) {
 
@@ -48,13 +45,8 @@ public class PlayerGenerator {
 
         String playerName = "";
 
-        try {
-            System.out.println("TESTE DO CARALHO");
-            BufferedReader bReader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-            //PrintWriter pWriter = new PrintWriter(clientSocket.getOutputStream());
-            System.out.println("HEHEHEH");
-            player.setPlayerName(bReader.readLine());
-            System.out.println("hehe");
+            CoolReader cReader = new CoolReader(clientSocket);
+            player.setPlayerName(cReader.readLine());
             System.out.println(player.getPlayerName());
  /*           while (dataManager.checkIfExists(playerName)) {
 
@@ -65,11 +57,6 @@ public class PlayerGenerator {
 
             player.setIsReady(true);
             System.out.println(player.getIsReady());
-
-        } catch (IOException e) {
-            e.getStackTrace();
-        }
-
     }
 
 
