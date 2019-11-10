@@ -50,7 +50,9 @@ public class Quiz implements Runnable {
             try {
                 Thread.sleep(1000);
                 sendQuestions.println(questions[questionIndex]);
+                System.out.println("QUIZ - LISTENING");
                 String answer = receiveAnswers.readLine();
+                System.out.println("QUIZ - Readingline");
                 System.out.println(answer);
 
                 questionIndex++;

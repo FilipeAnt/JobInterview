@@ -20,7 +20,7 @@ public class PlayerConfigurator {
         this.dataManager = new DataManager();
     }
 
-    public void loginOption(int clientOption, Player player) {
+    public void loginOption (int clientOption, Player player) {
 
         switch (clientOption) {
 
@@ -42,8 +42,6 @@ public class PlayerConfigurator {
     }
 
     public void unregisteredPlayer (Player player) {
-
-        String playerName = "";
 
             CoolReader cReader = new CoolReader(clientSocket);
             player.setPlayerName(cReader.readLine());

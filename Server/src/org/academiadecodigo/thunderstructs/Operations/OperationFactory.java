@@ -11,7 +11,7 @@ public class OperationFactory {
         switch (action) {
             case 1:
                 System.out.println("Operation Factory");
-                System.out.println(players[1].getPlayerName());
+                //System.out.println(players[1].getPlayerName());
                 System.out.println(players[0].getPlayerName());
                 new QuizPreparator(players).execute();
                 break;
