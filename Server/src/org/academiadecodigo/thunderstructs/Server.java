@@ -18,6 +18,13 @@ public class Server {
     private LinkedList<Player> onlinePlayers;
 
 
+    public static void main(String[] args) {
+
+        Server gameServer = new Server();
+        gameServer.start();
+
+    }
+
     public Server() {
 
         try {

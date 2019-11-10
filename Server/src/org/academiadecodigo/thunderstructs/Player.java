@@ -1,5 +1,6 @@
 package org.academiadecodigo.thunderstructs;
 
+import java.io.IOException;
 import java.net.Socket;
 import java.net.SocketException;
 
@@ -24,13 +25,6 @@ public class Player {
         this.pointsLastGame = 0;
         this.pointsLastSession = 0;
         this.playerSocket = socket;
-
-        try {
-            this.playerSocket.setKeepAlive(true);
-            this.playerSocket.setSoTimeout(5000);
-        } catch (SocketException e) {
-            e.printStackTrace();
-        }
     }
 
     public Player (String[] playerData) {

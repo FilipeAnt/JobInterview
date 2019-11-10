@@ -8,8 +8,6 @@ import java.util.concurrent.Executors;
 
 public class RoomManager implements Runnable {
 
-    private LinkedList<Player> onlinePlayers;
-    private ExecutorService clientsThreadPool;
     public static Player[] singleRoom;
     public static Player[] twoPlayersRoom;
     public static Player[] fourPlayersRoom;
@@ -19,8 +17,6 @@ public class RoomManager implements Runnable {
 
     public RoomManager(LinkedList<Player> onlinePlayers) {
 
-        this.onlinePlayers = onlinePlayers;
-        this.clientsThreadPool = Executors.newCachedThreadPool();
         this.singleRoom = new Player[1];
         this.twoPlayersRoom = new Player[2];
         this.fourPlayersRoom = new Player[4];
@@ -37,7 +33,7 @@ public class RoomManager implements Runnable {
             for (int i = 0; i < gameRooms.length; i++) {
 
                 int lastIndex = gameRooms[i].length - 1;
-                //checkOfflinePlayers(gameRooms[i]);
+                checkOfflinePlayers(gameRooms[i]);
 
                 if (gameRooms[i][lastIndex] != null) {
 
@@ -57,10 +53,8 @@ public class RoomManager implements Runnable {
                 return;
             }
 
-            System.out.println(room[i].isPlayerConnected());
 
             if (room[i].isPlayerConnected()) {
-                System.out.println("Alguém offline");
                 removeOfflinePlayer(room, i);
             }
         }
