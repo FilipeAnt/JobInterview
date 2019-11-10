@@ -17,7 +17,6 @@ public class Server {
     private Socket[] playerSockets;
     private ExecutorService clientsThreadPool;
     private int playersPerGame;
-    private Player[] fancyPlayers = new Player[2];
 
     private LinkedList<Player> onlinePlayers;
 
@@ -47,12 +46,12 @@ public class Server {
 
                 System.out.println(ServerMessage.AWAITING_CLIENT_CONNECTION);
                 Socket clientSocket = serverSocket.accept();
-                System.out.println("Connection accepted");
                 String playerName = "Temp" + playerCounter;
                 onlinePlayers.add( new Player(playerName, clientSocket));
+
+                System.out.println(getPlayerIPMessage());
                 clientsThreadPool.submit(new ClientHandler(onlinePlayers.getLast()));
                 playerCounter++;
-
             }
 
         } catch (IOException e) {
@@ -62,11 +61,7 @@ public class Server {
 
     public String getPlayerIPMessage () {
 
-        return ServerMessage.CONNECTION_WITH + playerSockets[playerCounter].getInetAddress() + ".\n";
-    }
-
-    public Player[] getFancyPlayers() {
-        return this.fancyPlayers;
+        return ServerMessage.CONNECTION_WITH + onlinePlayers.getFirst().getPlayerSocket().getInetAddress() + ".\n";
     }
 
     public LinkedList<Player> getOnlinePlayers () {
