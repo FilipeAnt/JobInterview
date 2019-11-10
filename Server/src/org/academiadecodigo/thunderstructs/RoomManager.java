@@ -3,8 +3,6 @@ package org.academiadecodigo.thunderstructs;
 import org.academiadecodigo.thunderstructs.Game.QuizPreparator;
 
 import java.util.LinkedList;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class RoomManager implements Runnable {
 
