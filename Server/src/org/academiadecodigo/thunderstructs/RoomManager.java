@@ -1,5 +1,7 @@
 package org.academiadecodigo.thunderstructs;
 
+import org.academiadecodigo.thunderstructs.Game.QuizPreparator;
+
 import java.util.LinkedList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -35,11 +37,12 @@ public class RoomManager implements Runnable {
             for (int i = 0; i < gameRooms.length; i++) {
 
                 int lastIndex = gameRooms[i].length - 1;
-                checkOfflinePlayers(gameRooms[i]);
+                //checkOfflinePlayers(gameRooms[i]);
 
                 if (gameRooms[i][lastIndex] != null) {
 
-                    clientsThreadPool.submit(new PlayerHandler(gameRooms[i]));
+                    new QuizPreparator(gameRooms[i]).run();
+                    //clientsThreadPool.submit(new PlayerHandler(gameRooms[i]));
                     resetRoom(i);
                 }
             }
@@ -50,8 +53,14 @@ public class RoomManager implements Runnable {
 
         for (int i = 0; i < room.length; i++) {
 
-            if (!room[i].getPlayerSocket().isBound()) {
+            if (room[i] == null) {
+                return;
+            }
 
+            System.out.println(room[i].isPlayerConnected());
+
+            if (room[i].isPlayerConnected()) {
+                System.out.println("Alguém offline");
                 removeOfflinePlayer(room, i);
             }
         }

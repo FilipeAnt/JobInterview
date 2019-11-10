@@ -1,6 +1,5 @@
 package org.academiadecodigo.thunderstructs.Game;
 
-import org.academiadecodigo.thunderstructs.Operations.Commands;
 import org.academiadecodigo.thunderstructs.Player;
 import org.academiadecodigo.thunderstructs.Utilitary.UtilityMethods;
 import org.academiadecodigo.thunderstructs.Utilitary.ServerConfiguration;
@@ -8,18 +7,13 @@ import org.academiadecodigo.thunderstructs.Utilitary.ServerConfiguration;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class QuizPreparator implements Commands {
+public class QuizPreparator implements Runnable {
 
     private Player[] players;
     private String[] roundQuestions;
-
-    //private Map<Socket, Integer> playerScoreMap;
     private ExecutorService cachedPool;
 
 
@@ -59,12 +53,6 @@ public class QuizPreparator implements Commands {
         }
         return hasQuestion;
     }
-
-/*    public Socket getPlayerSocket (Socket[] playerSockets) {
-
-         playerScoreMap.put();
-
-    }*/
 
     public void startQuizz(Player[] players) {
 
@@ -123,14 +111,12 @@ public class QuizPreparator implements Commands {
         }
     }
 
-
     @Override
-    public void execute() {
+    public void run() {
 
         String[] roundQuestions = generateRoundQuestions();
         System.out.println("StartQuiz");
         startQuizz(players);
         endQuiz();
     }
-
 }

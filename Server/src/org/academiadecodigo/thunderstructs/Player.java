@@ -1,6 +1,7 @@
 package org.academiadecodigo.thunderstructs;
 
 import java.net.Socket;
+import java.net.SocketException;
 
 public class Player {
 
@@ -23,6 +24,13 @@ public class Player {
         this.pointsLastGame = 0;
         this.pointsLastSession = 0;
         this.playerSocket = socket;
+
+        try {
+            this.playerSocket.setKeepAlive(true);
+            this.playerSocket.setSoTimeout(5000);
+        } catch (SocketException e) {
+            e.printStackTrace();
+        }
     }
 
     public Player (String[] playerData) {
@@ -58,6 +66,11 @@ public class Player {
 
     public Socket getPlayerSocket() {
         return playerSocket;
+    }
+
+    public boolean isPlayerConnected() {
+
+        return playerSocket.isClosed();
     }
 
     public void setRoundPoints(int roundPoints) {

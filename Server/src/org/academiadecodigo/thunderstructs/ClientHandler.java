@@ -35,8 +35,6 @@ public class ClientHandler implements Runnable {
         int roomOption = Integer.parseInt(clientOption) - 1;
 
         addToIndex(roomOption);
-
-        System.out.println(player.getPlayerName() + " chose a " + roomOption + " players room.");
     }
 
     public void addToIndex(int roomOption) {
@@ -46,7 +44,6 @@ public class ClientHandler implements Runnable {
             if (RoomManager.gameRooms[roomOption][i] == null) {
 
                 RoomManager.gameRooms[roomOption][i] = player;
-                System.out.println(RoomManager.gameRooms[roomOption].length + " deveria ser 1");
                 break;
             }
         }
@@ -58,6 +55,5 @@ public class ClientHandler implements Runnable {
 
         loginOption();
         addToRoom();
-        //RoomManager.singleRoom[0] = player;
     }
 }
