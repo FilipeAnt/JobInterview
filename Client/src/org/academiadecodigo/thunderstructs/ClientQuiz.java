@@ -146,10 +146,29 @@ public class ClientQuiz {
         System.out.println(Messages.SPACE + Messages.TIMEOUT + "\n\n");
         System.out.println("YOUR RESULTS: " + score + "\n");
         results();
+        System.out.println("PLATER RESULTS: \n");
         String test = "";
 
         test = receiveMessage();
         System.out.println(test);
+
+        if (checkIfWinner(test)) {
+
+            System.out.println(Messages.WINNER);
+        }
+    }
+
+    public boolean checkIfWinner (String payload) {
+
+        String[] analyzeThis = payload.split("==>");
+        int ola = Integer.parseInt(analyzeThis[1]);
+
+        if (ola == score) {
+
+            return true;
+
+        }
+        return false;
     }
 
     public int getScore() {
