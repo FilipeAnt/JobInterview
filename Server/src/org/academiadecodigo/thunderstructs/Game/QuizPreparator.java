@@ -15,6 +15,7 @@ public class QuizPreparator implements Runnable {
     private Player[] players;
     private String[] roundQuestions;
     private ExecutorService cachedPool;
+    private int highest = 0;
 
 
     public QuizPreparator(Player[] playerSockets) {
@@ -109,6 +110,22 @@ public class QuizPreparator implements Runnable {
 
             }
         }
+    }
+
+    public int checkWinner () {
+
+
+        for (Player s : players) {
+
+            if (s.getRoundPoints() > highest) {
+
+                highest = s.getRoundPoints();
+
+                System.out.println(highest);
+            }
+
+        }
+        return highest;
     }
 
     public Player[] getPlayers() {

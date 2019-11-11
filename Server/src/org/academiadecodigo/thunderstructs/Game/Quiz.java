@@ -121,51 +121,17 @@ public class Quiz implements Runnable {
 
         Player[] players = quizzPreparator.getPlayers();
         for(int i = 0; i < players.length; i++){
-            x += players[i].getPlayerName() + ": " + players[i].getRoundPoints() + "#";
+            x += players[i].getPlayerName() + ": " + players[i].getRoundPoints() + "||";
         }
+
+        x += "==>" + quizzPreparator.checkWinner();
+
         CoolWriter cool = new CoolWriter(player);
         cool.println(x);
         cool.println("péu");
 
-        /*for(Player p : players){
-            CoolWriter cool = new CoolWriter(p.getPlayerSocket());
-            cool.println(x);
-            cool.println("péu");
-        }*/
-        /*for (Player p : players) {
-
-            String finalMessage = p.getPlayerName() + ": " + p.getRoundPoints();
-            sendQuestions.println(finalMessage);
-            System.out.println(finalMessage);
-            //CoolWriter cWriter = new CoolWriter(p.getPlayerSocket());
-           //4 cWriter.println(finalMessage);
-
-        }
-        sendQuestions.println("péu");*/
     }
 
-/*    public void sendScores () {
-
-        Player[] players = quizzPreparator.getPlayers();
-
-        for (Player p : players) {
-
-            String finalMessage =  p.getPlayerName() + ": " + p.getRoundPoints();
-
-            for (Player nestP : players) {
-
-                if (p == nestP) {
-                    return;
-                }
-
-                CoolWriter coolWriter = new CoolWriter(nestP.getPlayerSocket());
-                coolWriter.println(finalMessage);
-            }
-
-        }
-
-
-    }*/
 
     public void setIsTimeout() {
         this.isTimeout = true;
