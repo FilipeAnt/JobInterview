@@ -43,7 +43,7 @@ public class Server {
 
         try {
             while (serverSocket.isBound()) {
-x
+
                 Socket clientSocket = serverSocket.accept();
 
                 String playerName = "Temp" + playerCounter;
