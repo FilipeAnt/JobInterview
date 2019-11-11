@@ -2,6 +2,7 @@ package org.academiadecodigo.thunderstructs;
 
 import org.academiadecodigo.bootcamp.Prompt;
 import org.academiadecodigo.bootcamp.scanners.menu.MenuInputScanner;
+import org.academiadecodigo.thunderstructs.Coolness.CoolReader;
 
 import java.io.*;
 import java.net.Socket;
@@ -140,11 +141,20 @@ public class ClientQuiz {
 
     public void showResults(){
 
-        String winner = receiveMessage();
+        //String winner = receiveMessage();
 
         System.out.println(Messages.SPACE + Messages.TIMEOUT + "\n\n");
-        System.out.println("YOUR RESULTS: " + score + "\n" + winner);
+        System.out.println("YOUR RESULTS: " + score + "\n");
         results();
+        String test = "";
+
+        while (!(test = receiveMessage()).equals("péu")) {
+
+            if (test.equals("")) {
+            continue;
+            }
+            System.out.println(test);
+        }
     }
 
     public int getScore() {

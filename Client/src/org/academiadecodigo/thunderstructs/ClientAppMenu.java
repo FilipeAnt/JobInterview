@@ -23,6 +23,7 @@ public class ClientAppMenu {
 
     public String stringPrompt(String message) {
 
+
         return "a";
     }
 
