@@ -132,6 +132,16 @@ public class QuizPreparator implements Runnable {
         return players;
     }
 
+    public void resetScores () {
+
+        for (Player p : players) {
+
+            p.setRoundPoints(0);
+
+        }
+
+    }
+
     @Override
     public void run() {
 
