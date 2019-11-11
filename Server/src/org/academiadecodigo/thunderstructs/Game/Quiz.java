@@ -80,7 +80,7 @@ public class Quiz implements Runnable {
                 System.out.println("player2");
                 sendScores();
                 stay = false;
-                quizzPreparator.resetScores();
+                //quizzPreparator.resetScores();
             }
         }
     }
