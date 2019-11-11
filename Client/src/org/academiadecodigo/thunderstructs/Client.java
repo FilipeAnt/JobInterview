@@ -26,6 +26,7 @@ public class Client {
         initialMenu();
         chooseRoom();
         listen();
+        start();
     }
 
     public void welcomeMessage() {

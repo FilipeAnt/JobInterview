@@ -148,13 +148,8 @@ public class ClientQuiz {
         results();
         String test = "";
 
-        while (!(test = receiveMessage()).equals("péu")) {
-
-            if (test.equals("")) {
-            continue;
-            }
-            System.out.println(test);
-        }
+        test = receiveMessage();
+        System.out.println(test);
     }
 
     public int getScore() {
