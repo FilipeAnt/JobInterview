@@ -20,16 +20,15 @@ public class ClientHandler implements Runnable {
         this.cReader = new CoolReader(clientSocket);
     }
 
-    public void loginOption () {
+    private void loginOption () {
 
             String clientOption = cReader.readLine();
             int loginOption = Integer.parseInt(clientOption);
 
             playerConfigurator.loginOption(loginOption, player);
-            System.out.println(player.getPlayerName());
     }
 
-    public void addToRoom () {
+    private void addToRoom () {
 
         String clientOption = cReader.readLine();
         int roomOption = Integer.parseInt(clientOption) - 1;
@@ -37,7 +36,7 @@ public class ClientHandler implements Runnable {
         addToIndex(roomOption);
     }
 
-    public void addToIndex(int roomOption) {
+    private void addToIndex(int roomOption) {
 
         for (int i = 0; i < RoomManager.gameRooms[roomOption].length; i++) {
 

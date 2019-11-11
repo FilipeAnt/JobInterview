@@ -2,8 +2,6 @@ package org.academiadecodigo.thunderstructs.Utilitary;
 
 import org.academiadecodigo.thunderstructs.Game.Quiz;
 
-import java.sql.Time;
-
 public class TimeCounter implements Runnable {
 
     private Quiz quiz;
@@ -23,6 +21,5 @@ public class TimeCounter implements Runnable {
             }
         }
         quiz.setIsTimeout();
-        System.out.println("TimeOut");
     }
 }

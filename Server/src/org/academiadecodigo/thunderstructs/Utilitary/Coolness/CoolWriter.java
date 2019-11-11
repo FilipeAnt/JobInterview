@@ -9,7 +9,7 @@ public class CoolWriter {
 
     PrintWriter pWriter;
 
-    public CoolWriter (String filePath) {
+    public CoolWriter(String filePath) {
 
         try {
 
@@ -21,7 +21,7 @@ public class CoolWriter {
     }
 
 
-    public CoolWriter (Socket socket) {
+    public CoolWriter(Socket socket) {
 
         try {
 
@@ -32,7 +32,7 @@ public class CoolWriter {
         }
     }
 
-    public void addNewLine () {
+    public void addNewLine () {//.append
     }
 
     public void println (String message) {
