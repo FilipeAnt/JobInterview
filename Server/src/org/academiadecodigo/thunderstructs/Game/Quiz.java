@@ -1,5 +1,7 @@
 package org.academiadecodigo.thunderstructs.Game;
 
+import org.academiadecodigo.thunderstructs.Player;
+import org.academiadecodigo.thunderstructs.Utilitary.Coolness.CoolWriter;
 import org.academiadecodigo.thunderstructs.Utilitary.TimeCounter;
 
 import java.io.BufferedReader;
@@ -65,23 +67,106 @@ public class Quiz implements Runnable {
 
         //TODO nao detecta quando a thread acaba
         sendQuestions.println("end");
+
         score = readScore();
         quizzPreparator.updatePlayerScore(player, score);
+        boolean stay = true;
 
+        while (stay) {
+
+            quizzPreparator.updatePlayerScore(player, score);
+
+            if (isGameFinished()) {
+                System.out.println("player2");
+                sendScores();
+                stay = false;
+
+            }
+        }
     }
+
     public int readScore(){
-        int score = 0;
+        int score = -1;
         try{
             BufferedReader readScore = new BufferedReader(new InputStreamReader(player.getInputStream()));
             String playerScore = readScore.readLine();
             score = Integer.parseInt(playerScore);
-            System.out.println(score);
-            readScore.close();
         } catch (IOException e){
             e.fillInStackTrace();
         }
         return score;
     }
+
+    public boolean isGameFinished() {
+
+        boolean finished = true;
+        Player[] players = quizzPreparator.getPlayers();
+
+        for (Player p : players) {
+
+            System.out.println(p.getRoundPoints());
+
+            if (p.getRoundPoints() == -1) {
+
+                finished = false;
+
+            }
+
+        }
+        return finished;
+    }
+
+    public synchronized void sendScores () {
+        String x ="";
+
+        Player[] players = quizzPreparator.getPlayers();
+        for(int i = 0; i < players.length; i++){
+            x += players[i].getPlayerName() + ": " + players[i].getRoundPoints() + "#";
+        }
+        CoolWriter cool = new CoolWriter(player);
+        cool.println(x);
+        cool.println("péu");
+
+        /*for(Player p : players){
+            CoolWriter cool = new CoolWriter(p.getPlayerSocket());
+            cool.println(x);
+            cool.println("péu");
+        }*/
+        /*for (Player p : players) {
+
+            String finalMessage = p.getPlayerName() + ": " + p.getRoundPoints();
+            sendQuestions.println(finalMessage);
+            System.out.println(finalMessage);
+            //CoolWriter cWriter = new CoolWriter(p.getPlayerSocket());
+           //4 cWriter.println(finalMessage);
+
+        }
+        sendQuestions.println("péu");*/
+    }
+
+/*    public void sendScores () {
+
+        Player[] players = quizzPreparator.getPlayers();
+
+        for (Player p : players) {
+
+            String finalMessage =  p.getPlayerName() + ": " + p.getRoundPoints();
+
+            for (Player nestP : players) {
+
+                if (p == nestP) {
+                    return;
+                }
+
+                CoolWriter coolWriter = new CoolWriter(nestP.getPlayerSocket());
+                coolWriter.println(finalMessage);
+            }
+
+        }
+
+
+    }*/
+
     public void setIsTimeout() {
         this.isTimeout = true;
         System.out.println(isTimeout + "Teste mega merda");

@@ -81,7 +81,7 @@ public class QuizPreparator implements Runnable {
 
             for (Player p : players) {
 
-                PrintWriter printWriter = new PrintWriter(p.getPlayerSocket().getOutputStream());
+                PrintWriter printWriter = new PrintWriter(p.getPlayerSocket().getOutputStream(), true);
                 printWriter.println(finalMessage);
 
             }
@@ -94,9 +94,9 @@ public class QuizPreparator implements Runnable {
 
     public String finalScoresMessage() {
 
-        //String message = "First player score was: " + playerScoreMap.get(players[0]) + " and player two score was: " + playerScoreMap.get(players[1]);
+        //String message = "First player score was: " + players[0].getRoundPoints() + " and player two score was: " + players[1].getRoundPoints();
 
-        return "hehe";
+        return "hehe";//message;
     }
 
     public void updatePlayerScore(Socket playerSocket, int playerScore) {
@@ -111,12 +111,16 @@ public class QuizPreparator implements Runnable {
         }
     }
 
+    public Player[] getPlayers() {
+        return players;
+    }
+
     @Override
     public void run() {
 
         String[] roundQuestions = generateRoundQuestions();
         System.out.println("StartQuiz");
         startQuizz(players);
-        endQuiz();
+        //endQuiz();
     }
 }

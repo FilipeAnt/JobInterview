@@ -25,6 +25,7 @@ public class Player {
         this.pointsLastGame = 0;
         this.pointsLastSession = 0;
         this.playerSocket = socket;
+        this.roundPoints = -1;
     }
 
     public Player (String[] playerData) {
@@ -81,5 +82,9 @@ public class Player {
 
     public boolean getIsReady(){
         return this.isReady;
+    }
+
+    public int getRoundPoints() {
+        return roundPoints;
     }
 }
