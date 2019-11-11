@@ -3,6 +3,10 @@ package org.academiadecodigo.thunderstructs;
 import org.academiadecodigo.bootcamp.Prompt;
 import org.academiadecodigo.bootcamp.scanners.menu.MenuInputScanner;
 import org.academiadecodigo.thunderstructs.Coolness.CoolReader;
+import org.academiadecodigo.thunderstructs.Menus.ClientQuizMenu;
+import org.academiadecodigo.thunderstructs.Utility.Decryptor;
+import org.academiadecodigo.thunderstructs.Utility.Log;
+import org.academiadecodigo.thunderstructs.Utility.Messages;
 
 import java.io.*;
 import java.net.Socket;
